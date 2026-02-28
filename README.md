@@ -9,11 +9,14 @@ Not: Bu proje mevcut ortam `PHP 8.1` oldugu icin Laravel 10 ile kuruldu. Laravel
 ```bash
 composer install
 npm install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate
-npm run dev
-php artisan serve
+php artisan migrate --force
+npm run build
+
+Plesk / shared hosting:
+- Upload the complete project into `httpdocs`
+- Keep the included `.env`
+- Ensure `storage` and `bootstrap/cache` are writable
+- The root `index.php` and `.htaccess` forward all requests to `public/`, so `httpdocs` can stay as the document root
 ```
 
 ## Ozellikler
