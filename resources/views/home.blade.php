@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Werbescreen | Premium Digital-Signage Erlebnis</title>
-    <meta name="description" content="Bringen Sie Ihre Marke mit aufmerksamkeitsstarken Display-Loesungen nach vorn. Installation, Content-Management und Support aus einer Hand.">
-    <meta property="og:title" content="Werbescreen">
-    <meta property="og:description" content="Ein schneller, premium gestalteter One-Page-Auftritt fuer moderne Werbedisplays.">
+    <title>EXPO DISPLAY | Premium Digital-Signage Erlebnis</title>
+    <meta name="description" content="Bringen Sie Ihre Marke mit aufmerksamkeitsstarken Display-Lösungen nach vorn. Installation, Content-Management und Support aus einer Hand.">
+    <meta property="og:title" content="EXPO DISPLAY">
+    <meta property="og:description" content="Ein schneller, premium gestalteter One-Page-Auftritt für moderne Werbedisplays.">
     <meta property="og:image" content="{{ url('/assets/og-placeholder.svg') }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url('/') }}">
@@ -27,7 +27,7 @@
                     <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-promo shadow-[0_8px_30px_rgba(59,130,246,0.35)]">
                         <span class="font-display text-lg font-extrabold text-white">W</span>
                     </span>
-                    <span class="font-display text-lg font-bold tracking-tight">Werbescreen</span>
+                    <span class="font-display text-lg font-bold tracking-tight">EXPO DISPLAY</span>
                 </a>
 
                 <button
@@ -37,7 +37,7 @@
                     aria-controls="mobile-menu"
                     data-menu-toggle
                 >
-                    <span class="sr-only">Menue</span>
+                    <span class="sr-only">Menü</span>
                     <span class="space-y-1.5">
                         <span class="block h-0.5 w-5 bg-current"></span>
                         <span class="block h-0.5 w-5 bg-current"></span>
@@ -96,15 +96,15 @@
                     <div class="relative z-10 flex flex-col justify-center">
                         <p class="hero-pill" data-hero-seq>Digital Signage mit Wirkung</p>
                         <h1 class="mt-5 max-w-3xl font-display text-[clamp(2.2rem,4vw,3.6rem)] font-extrabold leading-[1.05] tracking-tight" data-hero-seq>
-                            Bringen Sie Ihre Marke mit starken Display-Loesungen nach vorn.
+                            Bringen Sie Ihre Marke mit starken Display-Lösungen nach vorn.
                         </h1>
                         <p class="mt-6 max-w-2xl text-base leading-8 text-muted" data-hero-seq>
-                            Mit aufmerksamkeitsstarken Display-Loesungen wird Ihre Marke sichtbarer. Installation, Content-Management und Support in einem Paket.
+                            Mit aufmerksamkeitsstarken Display-Lösungen wird Ihre Marke sichtbarer. Installation, Content-Management und Support in einem Paket.
                         </p>
 
                         <div class="mt-8 flex flex-col gap-3 sm:flex-row" data-hero-seq>
                             <x-button href="#contact" data-scroll-to>Angebot Anfordern</x-button>
-                            <x-button href="#showcase" variant="outline" data-scroll-to>Demo Ansehen</x-button>
+                    <x-button href="#showcase" variant="outline" data-scroll-to>Demo ansehen</x-button>
                         </div>
 
                         <div class="mt-10 grid gap-4 sm:grid-cols-3" data-hero-seq>
@@ -146,7 +146,7 @@
                                                 <div class="screen-mini-card screen-mini-card-alt"></div>
                                             </div>
                                         </div>
-                                        <div class="kiosk-brand">PIXFORMANCE</div>
+                                        <div class="kiosk-brand">EXPO-DISPLAY.DE</div>
                                     </div>
                                     <div class="kiosk-shadow"></div>
                                 </div>
@@ -161,7 +161,7 @@
                     <x-section-title
                         eyebrow="Warum Wir"
                         title="Mehr Aufmerksamkeit, schnelle Umsetzung, sauberer Betrieb"
-                        description="Wir gestalten lebendige Screen-Konzepte nicht nur fuer Optik, sondern fuer messbare Wirkung am Standort."
+                        description="Wir gestalten lebendige Screen-Konzepte nicht nur für Optik, sondern für messbare Wirkung am Standort."
                     />
 
                     <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4" data-animate-group>
@@ -203,7 +203,7 @@
                     <x-section-title
                         eyebrow="Highlights"
                         title="Beeindruckende Auftritte mit 3D-Screen-Komponenten"
-                        description="Fuer jeden Use Case die passende Perspektive, die richtige Botschaft und ein konsistenter Markenauftritt."
+                        description="Für jeden Use Case die passende Perspektive, die richtige Botschaft und ein konsistenter Markenauftritt."
                     />
 
                     <div class="mt-12 grid gap-6 lg:grid-cols-3" data-animate-group>
@@ -243,13 +243,60 @@
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
                         eyebrow="Galerie"
-                        title="Beispiele fuer hochwertige Auftritte im Einsatz"
+                        title="Beispiele für hochwertige Auftritte im Einsatz"
                         description="Wenn im Galerie-Ordner keine JPG-Dateien liegen, verwendet die Seite automatisch die vorbereiteten Platzhalter."
                     />
 
                     <div class="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" data-animate-group>
                         @foreach ($galleryItems as $index => $item)
                             <x-gallery-item :item="$item" :index="$index" />
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+
+            <section id="video-showcase" class="section-space pt-0">
+                <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+                    <x-section-title
+                        eyebrow="Video-Schaufenster"
+                        title="Vier echte Vertikal-Spots im Kiosk-Rahmen"
+                        description="Die MP4-Dateien laufen direkt im weißen Device-Rahmen. Ideal als Testfläche für reale Werbemotive im 9:16-Format."
+                    />
+
+                    <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4" data-animate-group>
+                        @foreach ($videoShowcaseItems as $item)
+                            <article class="video-kiosk-card panel p-4 js-tilt" data-animate-item>
+                                <div class="video-kiosk-frame">
+                                    <div class="video-kiosk-top"></div>
+                                    <div class="video-kiosk-shell">
+                                        <div class="video-kiosk-sensor">
+                                            <span class="video-kiosk-lens"></span>
+                                        </div>
+                                        <div class="video-kiosk-screen">
+                                            <video
+                                                class="video-kiosk-media"
+                                                autoplay
+                                                muted
+                                                loop
+                                                playsinline
+                                                preload="metadata"
+                                                controlslist="nodownload noplaybackrate"
+                                                aria-label="{{ $item['title'] }}"
+                                            >
+                                                <source src="{{ $item['src'] }}" type="video/mp4">
+                                            </video>
+                                            <div class="video-kiosk-reflection"></div>
+                                        </div>
+                                        <div class="video-kiosk-brand">EXPO-DISPLAY.DE</div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-5 px-2 pb-2">
+                                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{{ $item['label'] }}</p>
+                                    <h3 class="mt-2 text-lg font-semibold text-text">{{ $item['title'] }}</h3>
+                                    <p class="mt-2 text-sm leading-7 text-muted">Echter vertikaler MP4-Spot im realitätsnahen Device-Layout für Vor-Ort-Demos.</p>
+                                </div>
+                            </article>
                         @endforeach
                     </div>
                 </div>
@@ -306,7 +353,7 @@
                 <div class="mx-auto max-w-4xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
                         eyebrow="FAQ"
-                        title="Die haeufigsten Fragen vor der Entscheidung"
+                        title="Die häufigsten Fragen vor der Entscheidung"
                         description="Kurze, klare Antworten zu Ablauf, Installation und Content-Verwaltung."
                         align="center"
                     />
@@ -324,14 +371,14 @@
                     <div class="panel p-6 md:p-8">
                         <x-section-title
                         eyebrow="Kontakt"
-                        title="Planen wir gemeinsam die passende Display-Loesung fuer Ihr Projekt"
-                        description="Senden Sie uns eine kurze Zusammenfassung. Unser Team erstellt die passende Struktur fuer Setup, Ablauf und Angebot."
+                        title="Planen wir gemeinsam die passende Display-Lösung für Ihr Projekt"
+                        description="Senden Sie uns eine kurze Zusammenfassung. Unser Team erstellt die passende Struktur für Setup, Ablauf und Angebot."
                         />
 
                         <div class="mt-8 space-y-5 text-sm text-muted">
                             <div>
                                 <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Adresse</p>
-                                <p class="mt-2">Beispielstrasse 12, 10115 Berlin</p>
+                                <p class="mt-2">Beispielstraße 12, 10115 Berlin</p>
                             </div>
                             <div>
                                 <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Telefon</p>
@@ -342,7 +389,7 @@
                                 <p class="mt-2"><a href="mailto:hello@example.com" class="transition hover:text-text">hello@example.com</a></p>
                             </div>
                             <div>
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Oeffnungszeiten</p>
+                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Öffnungszeiten</p>
                                 <p class="mt-2">Mo. bis Fr. 09:00 - 18:00</p>
                             </div>
                         </div>
@@ -437,7 +484,7 @@
                     </a>
                 </div>
 
-                <p>&copy; {{ now()->year }} Werbescreen</p>
+                <p>&copy; {{ now()->year }} EXPO DISPLAY</p>
             </div>
         </footer>
     </div>
@@ -450,8 +497,8 @@
         <div class="absolute inset-0 bg-black/80"></div>
         <div class="lightbox-dialog relative z-10 mx-4 w-full max-w-5xl rounded-[2rem] border border-white/10 bg-surface p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
             <div class="flex items-center justify-between gap-4">
-                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Galerie Vorschau</p>
-                <button type="button" class="icon-button" data-lightbox-close aria-label="Schliessen">X</button>
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Galerie-Vorschau</p>
+                <button type="button" class="icon-button" data-lightbox-close aria-label="Schließen">X</button>
             </div>
             <div class="mt-4 overflow-hidden rounded-[1.6rem] border border-white/10 bg-surface-2">
                 <img src="" alt="" width="1600" height="1200" class="h-[55vh] w-full object-cover" data-lightbox-image>
@@ -459,7 +506,7 @@
             <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <p id="lightbox-caption" class="text-sm text-text" data-lightbox-caption></p>
                 <div class="flex items-center gap-3">
-                    <button type="button" class="icon-button" data-lightbox-prev aria-label="Zurueck">Zurueck</button>
+                    <button type="button" class="icon-button" data-lightbox-prev aria-label="Zurück">Zurück</button>
                     <button type="button" class="icon-button" data-lightbox-next aria-label="Weiter">Weiter</button>
                 </div>
             </div>

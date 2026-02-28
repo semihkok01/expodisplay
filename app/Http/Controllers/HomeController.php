@@ -13,10 +13,10 @@ class HomeController extends Controller
             'High-Brightness-Display - in jeder Umgebung klar',
             'Kampagnenfokussiertes Design - steigert Conversion',
             'Instore-Navigation - lenkt den Kundenfluss',
-            'Event-Modus - sofortige Ankuendigungen',
+            'Event-Modus - sofortige Ankündigungen',
             'Marken-Schaufenster - premium Auftritt',
-            'Produktlaunch - aufmerksamkeitsstarke Praesentation',
-            'QR fuer schnelle Interaktion - messbare Ergebnisse',
+            'Produktlaunch - aufmerksamkeitsstarke Präsentation',
+            'QR für schnelle Interaktion - messbare Ergebnisse',
             'Dynamische Inhalte - leicht aktualisierbar',
             'Installation und Support - alles aus einer Hand',
         ];
@@ -49,7 +49,7 @@ class HomeController extends Controller
                 [
                     'icon' => 'spark',
                     'title' => 'Hohe Sichtbarkeit',
-                    'text' => 'Mit starkem Screen-Design, klarer Platzierung und praezisen Botschaften wird Ihre Marke sofort wahrgenommen.',
+                    'text' => 'Mit starkem Screen-Design, klarer Platzierung und präzisen Botschaften wird Ihre Marke sofort wahrgenommen.',
                 ],
                 [
                     'icon' => 'bolt',
@@ -70,37 +70,59 @@ class HomeController extends Controller
             'showcases' => [
                 [
                     'title' => 'Instore-Navigation',
-                    'text' => 'Ein intelligenter Screen-Flow fuehrt Besucher zur richtigen Aktion, zum richtigen Produkt und zur passenden Kampagne.',
+                    'text' => 'Ein intelligenter Screen-Flow führt Besucher zur richtigen Aktion, zum richtigen Produkt und zur passenden Kampagne.',
                     'chips' => ['Navigation', 'QR', 'Kampagne'],
                     'accent' => 'blue',
                 ],
                 [
-                    'title' => 'Premium-Flow fuer Schaufenster',
-                    'text' => 'Ein praesenter, aber kontrollierter Auftritt hebt Produkt und Markenbild sichtbar auf ein hoeheres Niveau.',
+                    'title' => 'Premium-Flow für Schaufenster',
+                    'text' => 'Ein präsenter, aber kontrollierter Auftritt hebt Produkt und Markenbild sichtbar auf ein höheres Niveau.',
                     'chips' => ['Schaufenster', 'Marktstart', 'Branding'],
                     'accent' => 'orange',
                 ],
                 [
                     'title' => 'Event- und Live-Update-Modus',
-                    'text' => 'Zeitkritische Kampagnen, Event-Ablaufe und spontane Aenderungen lassen sich zentral und schnell ausspielen.',
+                    'text' => 'Zeitkritische Kampagnen, Event-Abläufe und spontane Änderungen lassen sich zentral und schnell ausspielen.',
                     'chips' => ['Live', 'Sofort', '24/7'],
                     'accent' => 'green',
                 ],
             ],
             'galleryItems' => $galleryItems,
+            'videoShowcaseItems' => [
+                [
+                    'src' => asset('assets/videos/screen_01.mp4'),
+                    'title' => 'Golfreisen-Kampagne',
+                    'label' => 'Display 01',
+                ],
+                [
+                    'src' => asset('assets/videos/screen_02.mp4'),
+                    'title' => 'Reise-Promo im Loop',
+                    'label' => 'Display 02',
+                ],
+                [
+                    'src' => asset('assets/videos/screen_03.mp4'),
+                    'title' => 'Vertikaler Spot mit hoher Wirkung',
+                    'label' => 'Display 03',
+                ],
+                [
+                    'src' => asset('assets/videos/screen_04.mp4'),
+                    'title' => 'Dynamische Store-Kampagne',
+                    'label' => 'Display 04',
+                ],
+            ],
             'testimonials' => [
                 [
-                    'quote' => 'Im neuen Kampagnenzeitraum wurde der Schaufenster-Traffic deutlich zielgerichteter. Das Screen-Konzept hat den Einstieg in den Store spuerbar erhoeht.',
+                    'quote' => 'Im neuen Kampagnenzeitraum wurde der Schaufenster-Traffic deutlich zielgerichteter. Das Screen-Konzept hat den Einstieg in den Store spürbar erhöht.',
                     'name' => 'Ece Kara',
                     'role' => 'Marketing Managerin, Nova Retail',
                 ],
                 [
-                    'quote' => 'Die Installation war schnell, die Content-Uebergaenge sauber. Die Displays laufen ohne zusaetzliche Belastung fuer unser Team.',
+                    'quote' => 'Die Installation war schnell, die Content-Übergänge sauber. Die Displays laufen ohne zusätzliche Belastung für unser Team.',
                     'name' => 'Mert Aydin',
                     'role' => 'Operations Lead, Urban Hub',
                 ],
                 [
-                    'quote' => 'Unser Markenauftritt wirkt deutlich hochwertiger. Besonders an Launch-Tagen hat sich die Aufmerksamkeit klar verlaengert.',
+                    'quote' => 'Unser Markenauftritt wirkt deutlich hochwertiger. Besonders an Launch-Tagen hat sich die Aufmerksamkeit klar verlängert.',
                     'name' => 'Selin Demir',
                     'role' => 'Brand Management, Atelier One',
                 ],
@@ -116,7 +138,7 @@ class HomeController extends Controller
                     'value' => 2,
                     'prefix' => '',
                     'suffix' => 'x',
-                    'label' => 'laengere Verweildauer im Store',
+                    'label' => 'längere Verweildauer im Store',
                 ],
                 [
                     'value' => 24,
@@ -128,11 +150,11 @@ class HomeController extends Controller
             'faqs' => [
                 [
                     'question' => 'Wie lange dauert die Installation?',
-                    'answer' => 'Das haengt vom Standort ab. In der Regel sind Planung, Aufbau und der erste Content-Setup in kurzer Zeit abgeschlossen.',
+                    'answer' => 'Das hängt vom Standort ab. In der Regel sind Planung, Aufbau und der erste Content-Setup in kurzer Zeit abgeschlossen.',
                 ],
                 [
                     'question' => 'Verwalten wir die Inhalte selbst?',
-                    'answer' => 'Ja. Sie koennen die Inhalte selbst steuern oder unser Team uebernimmt die Kampagnenausspielung. Beides laeuft auf derselben Infrastruktur.',
+                    'answer' => 'Ja. Sie können die Inhalte selbst steuern oder unser Team übernimmt die Kampagnenausspielung. Beides läuft auf derselben Infrastruktur.',
                 ],
                 [
                     'question' => 'Kann man mit nur einem Screen starten?',

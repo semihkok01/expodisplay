@@ -13,6 +13,6 @@
   <path d="M240 245h110v110H240zM240 235v130M230 300h130" fill="none" stroke="rgba(234,240,255,0.72)" stroke-width="12"/>
   <rect x="510" y="210" width="380" height="24" rx="12" fill="rgba(234,240,255,0.8)"/>
   <rect x="510" y="260" width="300" height="16" rx="8" fill="rgba(234,240,255,0.46)"/>
-  <text x="100" y="790" fill="#EAF0FF" font-size="56" font-family="Inter, Arial, sans-serif" font-weight="700">QR fuer schnelle Interaktion</text>
+  <text x="100" y="790" fill="#EAF0FF" font-size="56" font-family="Inter, Arial, sans-serif" font-weight="700">QR für schnelle Interaktion</text>
   <text x="100" y="840" fill="#EAF0FF" font-size="28" font-family="Inter, Arial, sans-serif">Messbare und klare Kampagnenreaktion</text>
 </svg>

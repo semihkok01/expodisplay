@@ -1,4 +1,4 @@
-# Werbescreen
+# EXPO DISPLAY
 
 Tek sayfa, premium gorunumlu bir Laravel landing sitesi. Laravel 10 + Vite + TailwindCSS + anime.js kullanir.
 

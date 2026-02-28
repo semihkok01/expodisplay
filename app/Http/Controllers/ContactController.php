@@ -14,7 +14,7 @@ class ContactController extends Controller
         if ($request->filled('website')) {
             return redirect()
                 ->route('home')
-                ->with('status', 'Ihre Anfrage wurde uebermittelt. Wir melden uns in Kuerze bei Ihnen.');
+                ->with('status', 'Ihre Anfrage wurde übermittelt. Wir melden uns in Kürze bei Ihnen.');
         }
 
         $validated = $request->validate([
@@ -24,10 +24,10 @@ class ContactController extends Controller
             'phone' => ['nullable', 'string', 'max:40'],
             'message' => ['required', 'string', 'min:12', 'max:2000'],
         ], [
-            'required' => 'Bitte fuellen Sie das Feld :attribute aus.',
-            'email' => 'Bitte geben Sie eine gueltige E-Mail-Adresse ein.',
+            'required' => 'Bitte füllen Sie das Feld :attribute aus.',
+            'email' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
             'min' => 'Das Feld :attribute muss mindestens :min Zeichen enthalten.',
-            'max' => 'Das Feld :attribute darf hoechstens :max Zeichen enthalten.',
+            'max' => 'Das Feld :attribute darf höchstens :max Zeichen enthalten.',
             'string' => 'Das Feld :attribute muss ein Textwert sein.',
         ], [
             'name' => 'name',
@@ -50,6 +50,6 @@ class ContactController extends Controller
 
         return redirect()
             ->route('home')
-            ->with('status', 'Ihre Anfrage wurde uebermittelt. Wir melden uns in Kuerze bei Ihnen.');
+            ->with('status', 'Ihre Anfrage wurde übermittelt. Wir melden uns in Kürze bei Ihnen.');
     }
 }
