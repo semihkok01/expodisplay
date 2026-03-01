@@ -234,7 +234,7 @@
                         :description="__('home.features.description')"
                     />
 
-                    <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4 sm:mt-12" data-animate-group>
+                    <div class="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-4 sm:mt-8" data-animate-group>
                         @foreach ($features as $feature)
                             <article class="feature-card panel p-6 js-tilt" data-animate-item>
                                 <div class="feature-icon">
@@ -276,7 +276,7 @@
                         data-animate-item
                     />
 
-                    <div class="mt-8 grid gap-5 lg:grid-cols-3 sm:mt-12 sm:gap-6" data-animate-group data-animate-stagger="150" data-animate-duration="600">
+                    <div class="mt-6 grid gap-5 lg:grid-cols-3 sm:mt-8 sm:gap-6" data-animate-group data-animate-stagger="150" data-animate-duration="600">
                         @foreach ($showcases as $item)
                             <article class="showcase-card panel overflow-hidden p-5 md:p-6" data-animate-item>
                                 <div class="screen-stage js-parallax" data-parallax-speed="16">
@@ -293,7 +293,6 @@
                                                     <div class="strategy-screen-stripe strategy-screen-stripe-short" data-strategy-line></div>
                                                     <div class="strategy-screen-banner">
                                                         <span class="strategy-screen-chip">{{ $item['eyebrow'] }}</span>
-                                                        <strong data-strategy-copy>{{ $item['title'] }}</strong>
                                                         <span class="strategy-screen-meter">
                                                             <i data-strategy-progress></i>
                                                         </span>
