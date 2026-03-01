@@ -8,63 +8,27 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $galleryCaptions = [
-            'Intelligenter Werbekiosk - starker erster Eindruck',
-            'High-Brightness-Display - in jeder Umgebung klar',
-            'Kampagnenfokussiertes Design - steigert Conversion',
-            'Instore-Navigation - lenkt den Kundenfluss',
-            'Event-Modus - sofortige Ankündigungen',
-            'Marken-Schaufenster - premium Auftritt',
-            'Produktlaunch - aufmerksamkeitsstarke Präsentation',
-            'QR für schnelle Interaktion - messbare Ergebnisse',
-            'Dynamische Inhalte - leicht aktualisierbar',
-            'Installation und Support - alles aus einer Hand',
-        ];
-
-        $galleryItems = [];
-
-        foreach ($galleryCaptions as $index => $caption) {
-            $number = $index + 1;
-            $basename = sprintf('ad_%02d', $number);
-            $jpgPath = public_path("assets/gallery/{$basename}.jpg");
-            $galleryItems[] = [
-                'src' => file_exists($jpgPath)
-                    ? asset("assets/gallery/{$basename}.jpg")
-                    : asset("assets/gallery/{$basename}.svg"),
-                'caption' => $caption,
-                'tag' => match ($number % 5) {
-                    1 => 'Premium',
-                    2 => 'Wirkung',
-                    3 => 'Conversion',
-                    4 => 'Erlebnis',
-                    default => 'Support',
-                },
-                'width' => file_exists($jpgPath) ? 1600 : 1200,
-                'height' => file_exists($jpgPath) ? 1200 : 900,
-            ];
-        }
-
         return view('home', [
             'features' => [
                 [
                     'icon' => 'spark',
                     'title' => 'Hohe Sichtbarkeit',
-                    'text' => 'Mit starkem Screen-Design, klarer Platzierung und präzisen Botschaften wird Ihre Marke sofort wahrgenommen.',
+                    'text' => 'Klare Platzierung und präzise Inhalte sorgen dafür, dass Ihre Botschaft sofort wahrgenommen wird.',
                 ],
                 [
                     'icon' => 'bolt',
                     'title' => 'Schnelle Inbetriebnahme',
-                    'text' => 'Installation, Content-Setup und Ausspielung werden kompakt und effizient aus einer Hand umgesetzt.',
+                    'text' => 'Installation, Content-Setup und Ausspielung werden effizient aus einer Hand umgesetzt.',
                 ],
                 [
                     'icon' => 'shield',
                     'title' => 'Laufender Support',
-                    'text' => 'Mit technischem Monitoring, Updates und operativer Betreuung bleibt das System stabil im Einsatz.',
+                    'text' => 'Monitoring, Updates und Betreuung halten Ihr System stabil und einsatzbereit.',
                 ],
                 [
                     'icon' => 'chart',
                     'title' => 'Messbare Wirkung',
-                    'text' => 'Wir verbinden starke Kampagnen mit realen Kontaktpunkten vor Ort und richten alles auf Ergebnisse aus.',
+                    'text' => 'Kampagnen werden auf reale Kontaktpunkte und messbare Ergebnisse vor Ort ausgerichtet.',
                 ],
             ],
             'showcases' => [
@@ -87,7 +51,6 @@ class HomeController extends Controller
                     'accent' => 'green',
                 ],
             ],
-            'galleryItems' => $galleryItems,
             'videoShowcaseItems' => [
                 [
                     'src' => asset('assets/videos/screen_01.mp4'),
@@ -114,32 +77,32 @@ class HomeController extends Controller
                 [
                     'icon' => 'booth',
                     'title' => 'Messen',
-                    'text' => 'Ideal für starke Erstkontakte, Produktpräsentationen und Lead-Erfassung am Stand.',
+                    'text' => 'Starker Auftritt am Stand – Inhalte sekundenschnell anpassen.',
                 ],
                 [
                     'icon' => 'flag',
                     'title' => 'Golfclubs',
-                    'text' => 'Perfekt für Greenfee-Kommunikation, Events, Sponsorenflächen und Club-Services.',
+                    'text' => 'Greenfee, Events und Reisen sichtbar bewerben – direkt vor Ort.',
                 ],
                 [
                     'icon' => 'store',
-                    'title' => 'Retail-Flächen',
-                    'text' => 'Für mehr Sichtbarkeit am POS, klare Kampagnenführung und messbare Frequenzwirkung.',
+                    'title' => 'Retail',
+                    'text' => 'Kundenfluss lenken und Aktionen am Point of Sale pushen.',
                 ],
                 [
                     'icon' => 'frame',
                     'title' => 'Showrooms',
-                    'text' => 'Stärkt Premium-Präsentationen mit kontrollierter Markeninszenierung im Raum.',
+                    'text' => 'Produkte hochwertig inszenieren – wie ein Premium-Schaufenster.',
                 ],
                 [
                     'icon' => 'bed',
                     'title' => 'Hotels',
-                    'text' => 'Für Gäste-Informationen, Event-Hinweise und hochwertige digitale Empfangspunkte.',
+                    'text' => 'Infos, Angebote und Upsells elegant im Eingangsbereich platzieren.',
                 ],
                 [
                     'icon' => 'cross',
                     'title' => 'Krankenhäuser',
-                    'text' => 'Unterstützt Besucherführung, Informationsausgabe und klare Kommunikation im Alltag.',
+                    'text' => 'Wegführung, Hinweise und Updates klar und zentral ausspielen.',
                 ],
             ],
             'testimonials' => [

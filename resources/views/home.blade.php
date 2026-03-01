@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Digitale Werbedisplays für Messe &amp; Golfanlagen | ExpoDisplay</title>
-    <meta name="description" content="Premium Digital Signage Lösungen für Messen, Golfclubs, Retail-Flächen, Showrooms, Hotels und Krankenhäuser. Installation, Content-Management und Support aus einer Hand.">
+    <meta name="description" content="Premium Digital Signage Lösungen für Messen, Golfclubs und Retail-Flächen. Installation, Content-Management &amp; Support – alles aus einer Hand. Kostenlose Demo anfragen.">
     <meta property="og:title" content="Digitale Werbedisplays für Messe &amp; Golfanlagen | ExpoDisplay">
-    <meta property="og:description" content="Premium Digital Signage Lösungen für Messen, Golfclubs, Retail-Flächen, Showrooms, Hotels und Krankenhäuser. Installation, Content-Management und Support aus einer Hand.">
+    <meta property="og:description" content="Premium Digital Signage Lösungen für Messen, Golfclubs und Retail-Flächen. Installation, Content-Management &amp; Support – alles aus einer Hand. Kostenlose Demo anfragen.">
     <meta property="og:image" content="{{ url('/assets/og-placeholder.svg') }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url('/') }}">
+    <link rel="canonical" href="{{ config('app.url') }}">
     <meta name="theme-color" content="#0B1020">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +49,7 @@
                 <nav class="hidden items-center gap-2 lg:flex" aria-label="Hauptnavigation">
                     @foreach ([
                         'features' => 'Vorteile',
+                        'audiences' => 'Einsatzbereiche',
                         'gallery' => 'Galerie',
                         'references' => 'Referenzen',
                         'faq' => 'FAQ',
@@ -57,7 +59,7 @@
                             {{ $label }}
                         </a>
                     @endforeach
-                    <x-button href="#contact" data-scroll-to class="ml-2">Jetzt Beratung sichern</x-button>
+                    <x-button href="#contact" data-scroll-to class="ml-2">Kostenlose Demo anfragen</x-button>
                 </nav>
             </div>
 
@@ -65,6 +67,7 @@
                 <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-4 sm:px-6">
                     @foreach ([
                         'features' => 'Vorteile',
+                        'audiences' => 'Einsatzbereiche',
                         'gallery' => 'Galerie',
                         'references' => 'Referenzen',
                         'faq' => 'FAQ',
@@ -103,8 +106,8 @@
                         </p>
 
                         <div class="mt-8 flex flex-col gap-3 sm:flex-row" data-hero-seq>
-                            <x-button href="#contact" data-scroll-to>Jetzt Beratung sichern</x-button>
-                            <x-button href="#contact" variant="outline" data-scroll-to>Kostenlose Demo anfragen</x-button>
+                            <x-button href="#contact" data-scroll-to>Kostenlose Demo anfragen</x-button>
+                            <x-button href="#contact" variant="outline" data-scroll-to>Jetzt Beratung sichern</x-button>
                         </div>
                         <p class="mt-3 text-sm font-medium text-white/72" data-hero-seq>Kostenlos &amp; unverbindlich.</p>
 
@@ -244,24 +247,8 @@
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
                         eyebrow="Galerie"
-                        title="Beispiele für hochwertige Auftritte im Einsatz"
-                        description="Wenn im Galerie-Ordner keine JPG-Dateien liegen, verwendet die Seite automatisch die vorbereiteten Platzhalter."
-                    />
-
-                    <div class="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4" data-animate-group>
-                        @foreach ($galleryItems as $index => $item)
-                            <x-gallery-item :item="$item" :index="$index" />
-                        @endforeach
-                    </div>
-                </div>
-            </section>
-
-            <section id="video-showcase" class="section-space pt-0">
-                <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-                    <x-section-title
-                        eyebrow="Video-Schaufenster"
-                        title="Vier echte Vertikal-Spots im Kiosk-Rahmen"
-                        description="Die MP4-Dateien laufen direkt im weißen Device-Rahmen. Ideal als Testfläche für reale Werbemotive im 9:16-Format."
+                        title="Galerie: Echte Vertikal-Spots im Kiosk-Rahmen"
+                        description="Reale MP4-Demos im 9:16-Format – ideal für Messen, Golfclubs und Retail."
                     />
 
                     <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4" data-animate-group>
@@ -501,22 +488,13 @@
 
                             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                                 <p class="text-sm text-muted">Ihre Anfrage wird gespeichert und unser Team meldet sich zeitnah bei Ihnen.</p>
-                                <x-button type="submit">Jetzt Beratung sichern</x-button>
+                                <x-button type="submit">Kostenlose Demo anfragen</x-button>
                             </div>
                         </form>
                     </div>
                 </div>
             </section>
         </main>
-
-        <a
-            href="#contact"
-            data-scroll-to
-            class="floating-cta"
-            aria-label="Direkt zum Angebotsformular"
-        >
-            Jetzt Beratung sichern
-        </a>
 
         <footer class="border-t border-white/5 py-8">
             <div class="mx-auto flex max-w-7xl flex-col gap-5 px-5 text-sm text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
@@ -541,30 +519,6 @@
                 <p>&copy; {{ now()->year }} EXPO DISPLAY</p>
             </div>
         </footer>
-    </div>
-
-    <div
-        class="lightbox pointer-events-none fixed inset-0 z-[70] flex items-center justify-center opacity-0"
-        data-lightbox
-        aria-hidden="true"
-    >
-        <div class="absolute inset-0 bg-black/80"></div>
-        <div class="lightbox-dialog relative z-10 mx-4 w-full max-w-5xl rounded-[2rem] border border-white/10 bg-surface p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption">
-            <div class="flex items-center justify-between gap-4">
-                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Galerie-Vorschau</p>
-                <button type="button" class="icon-button" data-lightbox-close aria-label="Schließen">X</button>
-            </div>
-            <div class="mt-4 overflow-hidden rounded-[1.6rem] border border-white/10 bg-surface-2">
-                <img src="" alt="" width="1600" height="1200" class="h-[55vh] w-full object-cover" data-lightbox-image>
-            </div>
-            <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <p id="lightbox-caption" class="text-sm text-text" data-lightbox-caption></p>
-                <div class="flex items-center gap-3">
-                    <button type="button" class="icon-button" data-lightbox-prev aria-label="Zurück">Zurück</button>
-                    <button type="button" class="icon-button" data-lightbox-next aria-label="Weiter">Weiter</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     @if (session('status'))
