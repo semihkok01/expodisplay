@@ -50,6 +50,8 @@ return [
         'eyebrow' => '3D VIEW',
         'title' => 'ExpoDisplay Kiosk – 3D View & Dimensions',
         'description' => 'Rotate the device and see the dimensions at a glance.',
+        'hint' => 'Drag to rotate',
+        'fallback' => '3D preview could not be loaded.',
         'dimensions_title' => 'Dimensions (cm)',
         'dimensions' => [
             ['label' => 'Height', 'value' => '128.5 cm'],

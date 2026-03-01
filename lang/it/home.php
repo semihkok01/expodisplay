@@ -50,6 +50,8 @@ return [
         'eyebrow' => 'VISTA 3D',
         'title' => 'ExpoDisplay Kiosk – vista 3D e misure',
         'description' => 'Ruotate il dispositivo e visualizzate subito le dimensioni.',
+        'hint' => 'Trascina per ruotare',
+        'fallback' => 'L’anteprima 3D non può essere caricata.',
         'dimensions_title' => 'Misure (cm)',
         'dimensions' => [
             ['label' => 'Altezza', 'value' => '128,5 cm'],

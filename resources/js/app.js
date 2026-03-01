@@ -610,24 +610,3 @@ initStrategyDeviceAnimation();
 initStats();
 initAccordion();
 initToast();
-
-const deviceViewerRoot = document.querySelector('[data-device-viewer]');
-
-if (deviceViewerRoot) {
-    const observer = new IntersectionObserver((entries, currentObserver) => {
-        if (!entries.some((entry) => entry.isIntersecting)) {
-            return;
-        }
-
-        currentObserver.disconnect();
-
-        import('./device-viewer').then(({ initDeviceViewer }) => {
-            initDeviceViewer();
-        });
-    }, {
-        rootMargin: '220px 0px',
-        threshold: 0.1,
-    });
-
-    observer.observe(deviceViewerRoot);
-}

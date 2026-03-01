@@ -50,6 +50,8 @@ return [
         'eyebrow' => 'VUE 3D',
         'title' => 'Kiosque ExpoDisplay – vue 3D & dimensions',
         'description' => 'Faites pivoter l’appareil et voyez les dimensions en un coup d’œil.',
+        'hint' => 'Faites glisser pour tourner',
+        'fallback' => 'L’aperçu 3D n’a pas pu être chargé.',
         'dimensions_title' => 'Dimensions (cm)',
         'dimensions' => [
             ['label' => 'Hauteur', 'value' => '128,5 cm'],

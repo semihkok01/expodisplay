@@ -566,6 +566,252 @@
             </section>
         </main>
 
+        <script type="module">
+            const initKiosk3D = async () => {
+                const wrap = document.getElementById('kiosk3dWrap');
+                const canvas = document.getElementById('kiosk3dCanvas');
+                const fallback = document.getElementById('kiosk3dFallback');
+
+                if (!wrap || !canvas) {
+                    return;
+                }
+
+                const showFallback = (error) => {
+                    if (fallback) {
+                        fallback.classList.remove('hidden');
+                        fallback.classList.add('flex');
+                    }
+
+                    console.error('ExpoDisplay 3D viewer failed to load.', error);
+                };
+
+                try {
+                    const THREE = await import('https://unpkg.com/three@0.160.0/build/three.module.js');
+                    const { OrbitControls } = await import('https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js');
+
+                    const renderer = new THREE.WebGLRenderer({
+                        canvas,
+                        antialias: true,
+                        alpha: true,
+                        powerPreference: 'high-performance',
+                    });
+
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                    renderer.setClearAlpha(0);
+
+                    const scene = new THREE.Scene();
+
+                    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+                    camera.position.set(3.6, 2.45, 5.8);
+
+                    const controls = new OrbitControls(camera, renderer.domElement);
+                    controls.enableDamping = true;
+                    controls.dampingFactor = 0.06;
+                    controls.rotateSpeed = 0.8;
+                    controls.enableZoom = true;
+                    controls.minDistance = 3.8;
+                    controls.maxDistance = 8.5;
+                    controls.enablePan = false;
+                    controls.target.set(0, 1.45, 0);
+                    controls.update();
+
+                    const hemiLight = new THREE.HemisphereLight(0xeaf0ff, 0x0b1020, 1.1);
+                    scene.add(hemiLight);
+
+                    const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+                    keyLight.position.set(5, 7, 6);
+                    scene.add(keyLight);
+
+                    const fillLight = new THREE.DirectionalLight(0x93c5fd, 0.45);
+                    fillLight.position.set(-5, 3, 4);
+                    scene.add(fillLight);
+
+                    const roundedRectShape = (width, height, radius) => {
+                        const x = -width / 2;
+                        const y = -height / 2;
+                        const shape = new THREE.Shape();
+
+                        shape.moveTo(x + radius, y);
+                        shape.lineTo(x + width - radius, y);
+                        shape.quadraticCurveTo(x + width, y, x + width, y + radius);
+                        shape.lineTo(x + width, y + height - radius);
+                        shape.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                        shape.lineTo(x + radius, y + height);
+                        shape.quadraticCurveTo(x, y + height, x, y + height - radius);
+                        shape.lineTo(x, y + radius);
+                        shape.quadraticCurveTo(x, y, x + radius, y);
+
+                        return shape;
+                    };
+
+                    const createRoundedPanel = (width, height, depth, radius, material) => {
+                        const geometry = new THREE.ExtrudeGeometry(roundedRectShape(width, height, radius), {
+                            depth,
+                            bevelEnabled: false,
+                            curveSegments: 18,
+                        });
+
+                        geometry.center();
+
+                        return new THREE.Mesh(geometry, material);
+                    };
+
+                    const scale = 0.035;
+                    const kioskHeight = 128.5 * scale;
+                    const kioskWidth = 76 * scale;
+                    const kioskDepth = 50 * scale;
+
+                    const frameMaterial = new THREE.MeshStandardMaterial({
+                        color: 0x0b1220,
+                        roughness: 0.42,
+                        metalness: 0.18,
+                    });
+
+                    const panelMaterial = new THREE.MeshStandardMaterial({
+                        color: 0xf4f7ff,
+                        roughness: 0.22,
+                        metalness: 0.05,
+                    });
+
+                    const screenMaterial = new THREE.MeshStandardMaterial({
+                        color: 0x070b14,
+                        roughness: 0.14,
+                        metalness: 0.28,
+                        emissive: 0x0f172a,
+                        emissiveIntensity: 0.16,
+                    });
+
+                    const group = new THREE.Group();
+                    scene.add(group);
+
+                    const outerFrame = createRoundedPanel(kioskWidth, kioskHeight, kioskDepth, 0.22, frameMaterial);
+                    group.add(outerFrame);
+
+                    const whitePanel = createRoundedPanel(kioskWidth - 0.24, kioskHeight - 0.24, kioskDepth - 0.18, 0.18, panelMaterial);
+                    whitePanel.position.z = 0.02;
+                    group.add(whitePanel);
+
+                    const screenFrame = createRoundedPanel(kioskWidth - 0.82, kioskHeight - 1.8, 0.14, 0.12, frameMaterial);
+                    screenFrame.position.set(0, -0.12, kioskDepth / 2 - 0.22);
+                    group.add(screenFrame);
+
+                    const screen = createRoundedPanel(kioskWidth - 1.02, kioskHeight - 2.05, 0.06, 0.1, screenMaterial);
+                    screen.position.set(0, -0.12, kioskDepth / 2 - 0.1);
+                    group.add(screen);
+
+                    const gloss = new THREE.Mesh(
+                        new THREE.PlaneGeometry(kioskWidth - 1.28, kioskHeight - 2.45),
+                        new THREE.MeshBasicMaterial({
+                            color: 0xffffff,
+                            transparent: true,
+                            opacity: 0.06,
+                            side: THREE.DoubleSide,
+                        })
+                    );
+                    gloss.position.set(-0.08, 0.02, kioskDepth / 2 + 0.06);
+                    gloss.rotation.y = -0.14;
+                    group.add(gloss);
+
+                    const sensor = createRoundedPanel(0.78, 0.16, 0.08, 0.06, frameMaterial);
+                    sensor.position.set(0, kioskHeight / 2 - 0.62, kioskDepth / 2 + 0.06);
+                    group.add(sensor);
+
+                    const lens = new THREE.Mesh(
+                        new THREE.CircleGeometry(0.045, 18),
+                        new THREE.MeshStandardMaterial({
+                            color: 0x1d4ed8,
+                            emissive: 0x60a5fa,
+                            emissiveIntensity: 0.18,
+                        })
+                    );
+                    lens.position.set(-0.19, kioskHeight / 2 - 0.62, kioskDepth / 2 + 0.11);
+                    group.add(lens);
+
+                    group.rotation.x = -0.08;
+                    group.rotation.y = 0.52;
+
+                    let isVisible = true;
+                    let rafId = 0;
+
+                    const resize = () => {
+                        const width = Math.max(wrap.clientWidth, 1);
+                        const height = Math.max(wrap.clientHeight, 260);
+
+                        camera.aspect = width / height;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(width, height, false);
+                        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                    };
+
+                    const render = () => {
+                        if (!isVisible) {
+                            return;
+                        }
+
+                        controls.update();
+                        renderer.render(scene, camera);
+                        rafId = window.requestAnimationFrame(render);
+                    };
+
+                    const start = () => {
+                        if (!rafId) {
+                            render();
+                        }
+                    };
+
+                    const stop = () => {
+                        if (rafId) {
+                            window.cancelAnimationFrame(rafId);
+                            rafId = 0;
+                        }
+                    };
+
+                    const visibilityObserver = new IntersectionObserver((entries) => {
+                        const entry = entries[0];
+                        isVisible = Boolean(entry?.isIntersecting);
+
+                        if (isVisible) {
+                            start();
+                        } else {
+                            stop();
+                        }
+                    }, {
+                        threshold: 0.08,
+                    });
+
+                    visibilityObserver.observe(wrap);
+
+                    const resizeObserver = 'ResizeObserver' in window
+                        ? new ResizeObserver(() => resize())
+                        : null;
+
+                    if (resizeObserver) {
+                        resizeObserver.observe(wrap);
+                    }
+
+                    window.addEventListener('resize', resize, { passive: true });
+                    window.addEventListener('pagehide', () => {
+                        stop();
+                        controls.dispose();
+                        visibilityObserver.disconnect();
+                        resizeObserver?.disconnect();
+                        renderer.dispose();
+                    }, { once: true });
+
+                    resize();
+                    start();
+                } catch (error) {
+                    showFallback(error);
+                }
+            };
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initKiosk3D, { once: true });
+            } else {
+                initKiosk3D();
+            }
+        </script>
+
         <footer class="border-t border-white/5 py-8">
             <div class="mx-auto flex max-w-7xl flex-col gap-5 px-5 text-sm text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
                 <div class="flex flex-wrap items-center gap-4">

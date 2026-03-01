@@ -1,13 +1,19 @@
 <section id="device-3d" class="section-space pt-0">
     <div class="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
-        <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center lg:gap-8">
             <div class="lg:col-span-7">
                 <div class="device-viewer-shell panel overflow-hidden p-3 sm:p-4">
                     <div
-                        class="device-viewer-stage min-h-[320px] rounded-3xl border border-white/10 bg-white/[0.03] shadow-[0_16px_40px_rgba(5,10,25,0.24)] md:min-h-[360px] lg:min-h-[420px]"
-                        data-device-viewer
+                        id="kiosk3dWrap"
+                        class="device-viewer-stage relative min-h-[280px] w-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(5,10,25,0.24)] sm:min-h-[320px] md:min-h-[360px] lg:min-h-[400px]"
                     >
-                        <canvas class="block h-full w-full" data-device-canvas aria-label="{{ __('home.device.aria') }}"></canvas>
+                        <span class="pointer-events-none absolute left-4 top-4 z-[2] rounded-full border border-white/10 bg-[rgba(11,16,32,0.7)] px-3 py-1 text-[11px] font-medium tracking-[0.08em] text-white/72">
+                            {{ __('home.device.hint') }}
+                        </span>
+                        <canvas id="kiosk3dCanvas" class="block h-full min-h-[280px] w-full sm:min-h-[320px] md:min-h-[360px] lg:min-h-[400px]" aria-label="{{ __('home.device.aria') }}"></canvas>
+                        <div id="kiosk3dFallback" class="absolute inset-0 hidden items-center justify-center px-6 text-center text-sm text-white/72">
+                            {{ __('home.device.fallback') }}
+                        </div>
                     </div>
                 </div>
             </div>

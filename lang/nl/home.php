@@ -50,6 +50,8 @@ return [
         'eyebrow' => '3D WEERGAVE',
         'title' => 'ExpoDisplay Kiosk – 3D weergave & afmetingen',
         'description' => 'Draai het apparaat en bekijk de afmetingen in één oogopslag.',
+        'hint' => 'Sleep om te draaien',
+        'fallback' => '3D-preview kon niet worden geladen.',
         'dimensions_title' => 'Afmetingen (cm)',
         'dimensions' => [
             ['label' => 'Hoogte', 'value' => '128,5 cm'],

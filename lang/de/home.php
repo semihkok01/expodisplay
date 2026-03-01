@@ -50,6 +50,8 @@ return [
         'eyebrow' => '3D ANSICHT',
         'title' => 'ExpoDisplay Kiosk – 3D Ansicht & Maße',
         'description' => 'Drehen Sie das Gerät und sehen Sie die Abmessungen auf einen Blick.',
+        'hint' => 'Drag to rotate',
+        'fallback' => '3D Vorschau konnte nicht geladen werden.',
         'dimensions_title' => 'Maße (cm)',
         'dimensions' => [
             ['label' => 'Höhe', 'value' => '128,5 cm'],
