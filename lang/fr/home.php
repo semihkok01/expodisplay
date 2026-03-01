@@ -47,7 +47,7 @@ return [
         ],
     ],
     'device' => [
-        'eyebrow' => 'VUE 3D',
+        'eyebrow' => 'Dimensions',
         'title' => 'Kiosque ExpoDisplay – vue 3D & dimensions',
         'description' => 'Faites pivoter l’appareil et voyez les dimensions en un coup d’œil.',
         'hint' => 'Faites glisser pour tourner',

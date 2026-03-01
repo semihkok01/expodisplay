@@ -47,7 +47,7 @@ return [
         ],
     ],
     'device' => [
-        'eyebrow' => '3D WEERGAVE',
+        'eyebrow' => 'Maten',
         'title' => 'ExpoDisplay Kiosk – 3D weergave & afmetingen',
         'description' => 'Draai het apparaat en bekijk de afmetingen in één oogopslag.',
         'hint' => 'Sleep om te draaien',

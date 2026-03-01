@@ -47,7 +47,7 @@ return [
         ],
     ],
     'device' => [
-        'eyebrow' => '3D ANSICHT',
+        'eyebrow' => 'Maßübersicht',
         'title' => 'ExpoDisplay Kiosk – 3D Ansicht & Maße',
         'description' => 'Drehen Sie das Gerät und sehen Sie die Abmessungen auf einen Blick.',
         'hint' => 'Drag to rotate',

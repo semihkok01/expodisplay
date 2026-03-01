@@ -47,7 +47,7 @@ return [
         ],
     ],
     'device' => [
-        'eyebrow' => '3D VIEW',
+        'eyebrow' => 'Dimensions',
         'title' => 'ExpoDisplay Kiosk – 3D View & Dimensions',
         'description' => 'Rotate the device and see the dimensions at a glance.',
         'hint' => 'Drag to rotate',

@@ -15,7 +15,7 @@
                 <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{{ __('home.device.dimensions_title') }}</p>
                 <dl class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
                     @foreach (trans('home.device.dimensions') as $dimension)
-                        <div class="rounded-2xl border border-white/8 bg-white/[0.02] px-4 py-4">
+                        <div class="rounded-2xl border border-white/8 bg-white/[0.02] px-4 py-4 text-center">
                             <dt class="text-sm text-muted">{{ $dimension['label'] }}</dt>
                             <dd class="mt-2 text-lg font-semibold text-text md:text-xl">{{ $dimension['value'] }}</dd>
                         </div>

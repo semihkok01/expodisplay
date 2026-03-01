@@ -47,7 +47,7 @@ return [
         ],
     ],
     'device' => [
-        'eyebrow' => 'VISTA 3D',
+        'eyebrow' => 'Dimensioni',
         'title' => 'ExpoDisplay Kiosk – vista 3D e misure',
         'description' => 'Ruotate il dispositivo e visualizzate subito le dimensioni.',
         'hint' => 'Trascina per ruotare',
