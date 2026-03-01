@@ -1149,28 +1149,28 @@ body.menu-open {
     }
 
     .hero-mockup-wrap .kiosk-frame {
-        max-width: 16.25rem;
+        max-width: 13.75rem;
     }
 
     .hero-mockup-wrap .kiosk-shell {
         min-height: auto;
-        padding: 0.92rem 0.92rem 0.78rem;
-        border-width: 8px;
+        padding: 0.78rem 0.78rem 0.66rem;
+        border-width: 7px;
         transform: none;
     }
 
     .hero-mockup-wrap .kiosk-screen {
-        min-height: 17.75rem;
+        min-height: 14.9rem;
     }
 
     .hero-mockup-wrap .kiosk-top {
-        width: 6.25rem;
-        height: 1.9rem;
+        width: 5rem;
+        height: 1.45rem;
     }
 
     .hero-mockup-wrap .kiosk-brand {
-        margin-top: 0.7rem;
-        font-size: 0.68rem;
+        margin-top: 0.55rem;
+        font-size: 0.62rem;
     }
 
     .hero-metrics-grid {
