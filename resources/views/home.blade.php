@@ -24,11 +24,17 @@
     <div class="page-shell relative overflow-x-clip">
         <header id="top" class="sticky top-0 z-50 border-b border-white/5 bg-[rgba(11,16,32,0.95)]">
             <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-                <a href="#top" data-scroll-to class="flex items-center gap-3">
-                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-promo shadow-[0_8px_30px_rgba(59,130,246,0.35)]">
-                        <span class="font-display text-lg font-extrabold text-white">W</span>
-                    </span>
-                    <span class="font-display text-lg font-bold tracking-tight">EXPO DISPLAY</span>
+                <a href="#top" data-scroll-to class="flex items-center">
+                    <img
+                        src="{{ asset('assets/logo/logo160.png') }}"
+                        srcset="{{ asset('assets/logo/logo160.png') }} 1x, {{ asset('assets/logo/logo320.png') }} 2x"
+                        alt="ExpoDisplay"
+                        width="160"
+                        height="160"
+                        class="block h-auto max-h-[42px] w-auto object-contain align-middle"
+                        decoding="async"
+                        fetchpriority="high"
+                    >
                 </a>
 
                 <button
