@@ -371,9 +371,9 @@
                         <div class="mt-8 space-y-4 sm:mt-10 sm:space-y-5" data-animate-group>
                             @foreach ($testimonials as $testimonial)
                                 <article class="panel p-6" data-animate-item>
-                                    <div class="mb-3 flex items-center gap-0.5 text-[#FACC15]" aria-label="{{ __('common.references.stars_label') }}">
+                                    <div class="mb-3 flex items-center gap-[2px] text-[#FACC15]" aria-label="{{ __('common.references.stars_label') }}">
                                         @for ($i = 0; $i < 5; $i++)
-                                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-3 w-3">
+                                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-[6px] w-[6px]">
                                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81H7.03a1 1 0 00.95-.69l1.07-3.292z"/>
                                             </svg>
                                         @endfor
