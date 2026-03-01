@@ -26,6 +26,7 @@ const initMobileNav = () => {
     }
 
     const setState = (open) => {
+        menu.classList.toggle('hidden', !open);
         menu.classList.toggle('is-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         menu.setAttribute('aria-hidden', open ? 'false' : 'true');
@@ -51,6 +52,8 @@ const initMobileNav = () => {
             setState(false);
         }
     });
+
+    setState(false);
 };
 
 const initSmoothScroll = () => {
@@ -70,7 +73,9 @@ const initSmoothScroll = () => {
 
             event.preventDefault();
 
-            const top = window.scrollY + target.getBoundingClientRect().top - getHeaderOffset();
+            const top = href === '#top'
+                ? 0
+                : window.scrollY + target.getBoundingClientRect().top - getHeaderOffset();
 
             window.scrollTo({
                 top,
@@ -78,6 +83,19 @@ const initSmoothScroll = () => {
             });
         });
     });
+};
+
+const initInitialScrollPosition = () => {
+    if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+    }
+
+    const resetToTop = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    };
+
+    window.addEventListener('load', resetToTop, { once: true });
+    window.addEventListener('pageshow', resetToTop);
 };
 
 const initActiveSections = () => {
@@ -238,14 +256,16 @@ const initRevealGroups = () => {
             if (prefersReducedMotion) {
                 clearAnimatedState(items);
             } else {
+                const stagger = Number(entry.target.dataset.animateStagger || 120);
+                const duration = Number(entry.target.dataset.animateDuration || (isMobileViewport ? 600 : 820));
                 anime({
                     targets: items,
                     opacity: [0, 1],
                     translateY: [50, 0],
                     rotateX: [15, 0],
                     filter: ['blur(4px)', 'blur(0px)'],
-                    delay: anime.stagger(isMobileViewport ? 80 : 120),
-                    duration: isMobileViewport ? 600 : 820,
+                    delay: anime.stagger(isMobileViewport ? Math.min(stagger, 100) : stagger),
+                    duration,
                     easing: 'easeOutExpo',
                     complete: () => clearAnimatedState(items),
                 });
@@ -302,7 +322,9 @@ const initTilt = () => {
             const rect = surface.getBoundingClientRect();
             const offsetX = (event.clientX - rect.left) / rect.width - 0.5;
             const offsetY = (event.clientY - rect.top) / rect.height - 0.5;
-            const intensity = surface.classList.contains('feature-card') ? 6 : 10;
+            const configuredIntensity = Number(surface.dataset.tiltIntensity || 0);
+            const defaultIntensity = surface.classList.contains('feature-card') ? 6 : 10;
+            const intensity = configuredIntensity || defaultIntensity;
 
             updateTilt(offsetX * intensity, offsetY * -intensity);
         });
@@ -521,6 +543,7 @@ const initToast = () => {
 };
 
 initMobileNav();
+initInitialScrollPosition();
 initSmoothScroll();
 initActiveSections();
 initScrollProgress();

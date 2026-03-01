@@ -73,7 +73,7 @@
                 </nav>
             </div>
 
-            <nav id="mobile-menu" class="mobile-nav border-t border-white/5 lg:hidden" aria-label="Mobile Navigation" aria-hidden="true">
+            <nav id="mobile-menu" class="mobile-nav hidden border-t border-white/5 lg:hidden" aria-label="Mobile Navigation" aria-hidden="true">
                 <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-4 sm:px-6">
                     @foreach ([
                         'features' => 'Vorteile',
@@ -215,16 +215,17 @@
             <section id="showcase" class="section-space pt-0">
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
-                        eyebrow="Highlights"
-                        title="Beeindruckende Auftritte mit 3D-Screen-Komponenten"
-                        description="Für jeden Use Case die passende Perspektive, die richtige Botschaft und ein konsistenter Markenauftritt."
+                        eyebrow="STRATEGIE"
+                        title="Drei Strategien, mit denen Displays vor Ort messbar wirken"
+                        description="Nicht nur schöne Screens – sondern klar gesteuerte Aufmerksamkeit, gezielte Besucherführung und flexible Kampagnensteuerung."
+                        data-animate-item
                     />
 
-                    <div class="mt-8 grid gap-5 lg:grid-cols-3 sm:mt-12 sm:gap-6" data-animate-group>
+                    <div class="mt-8 grid gap-5 lg:grid-cols-3 sm:mt-12 sm:gap-6" data-animate-group data-animate-stagger="150" data-animate-duration="600">
                         @foreach ($showcases as $item)
-                            <article class="showcase-card panel overflow-hidden p-6" data-animate-item>
+                            <article class="showcase-card panel overflow-hidden p-5 md:p-6" data-animate-item>
                                 <div class="screen-stage js-parallax" data-parallax-speed="16">
-                                    <div class="tilt-surface js-tilt">
+                                    <div class="tilt-surface js-tilt" data-tilt-intensity="3">
                                         <div class="showcase-screen showcase-{{ $item['accent'] }}">
                                             <div class="showcase-panel"></div>
                                             <div class="showcase-panel showcase-panel-short"></div>
@@ -237,16 +238,10 @@
                                     </div>
                                 </div>
 
-                                <h3 class="mt-8 text-xl font-semibold text-text">{{ $item['title'] }}</h3>
+                                <p class="mt-7 text-xs font-semibold uppercase tracking-[0.24em] text-white/50">{{ $item['eyebrow'] }}</p>
+                                <h3 class="mt-3 text-xl font-semibold text-text">{{ $item['title'] }}</h3>
                                 <p class="mt-3 text-sm leading-7 text-muted">{{ $item['text'] }}</p>
-
-                                <div class="mt-5 flex flex-wrap gap-2">
-                                    @foreach ($item['chips'] as $chip)
-                                        <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
-                                            {{ $chip }}
-                                        </span>
-                                    @endforeach
-                                </div>
+                                <p class="mt-5 text-sm font-semibold text-primary">{{ $item['result'] }}</p>
                             </article>
                         @endforeach
                     </div>
