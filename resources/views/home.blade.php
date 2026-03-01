@@ -1,16 +1,46 @@
+@php
+    $activeLocale = app()->getLocale();
+    $htmlLang = [
+        'de' => 'de-DE',
+        'en' => 'en',
+        'nl' => 'nl-NL',
+        'fr' => 'fr-FR',
+        'it' => 'it-IT',
+    ][$activeLocale] ?? $activeLocale;
+    $cleanCanonicalUrl = url()->current();
+    $languageOptions = __('common.language.options');
+    $activeLanguage = $languageOptions[$activeLocale] ?? $languageOptions['de'];
+    $alternateLocaleCodes = ['de', 'en', 'nl', 'fr', 'it'];
+@endphp
 <!DOCTYPE html>
-<html lang="de">
+<html lang="{{ $htmlLang }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Digitale Werbedisplays für Messe &amp; Golfanlagen | ExpoDisplay</title>
-    <meta name="description" content="Premium Digital Signage Lösungen für Messen, Golfclubs und Retail-Flächen. Installation, Content-Management &amp; Support – alles aus einer Hand. Kostenlose Demo anfragen.">
-    <meta property="og:title" content="Digitale Werbedisplays für Messe &amp; Golfanlagen | ExpoDisplay">
-    <meta property="og:description" content="Premium Digital Signage Lösungen für Messen, Golfclubs und Retail-Flächen. Installation, Content-Management &amp; Support – alles aus einer Hand. Kostenlose Demo anfragen.">
+    <title>{{ __('common.meta.title') }}</title>
+    <meta name="description" content="{{ __('common.meta.description') }}">
+    <meta property="og:title" content="{{ __('common.meta.title') }}">
+    <meta property="og:description" content="{{ __('common.meta.description') }}">
     <meta property="og:image" content="{{ url('/assets/og-placeholder.svg') }}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url('/') }}">
-    <link rel="canonical" href="{{ config('app.url') }}">
+    <meta property="og:url" content="{{ request()->fullUrl() }}">
+    <meta name="twitter:title" content="{{ __('common.meta.title') }}">
+    <meta name="twitter:description" content="{{ __('common.meta.description') }}">
+    <meta name="twitter:image" content="{{ url('/assets/og-placeholder.svg') }}">
+    <link rel="canonical" href="{{ $cleanCanonicalUrl }}">
+    @foreach ($alternateLocaleCodes as $localeCode)
+        @php
+            $hreflang = [
+                'de' => 'de-DE',
+                'en' => 'en',
+                'nl' => 'nl-NL',
+                'fr' => 'fr-FR',
+                'it' => 'it-IT',
+            ][$localeCode];
+        @endphp
+        <link rel="alternate" hreflang="{{ $hreflang }}" href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }}">
+    @endforeach
+    <link rel="alternate" hreflang="x-default" href="{{ $cleanCanonicalUrl }}">
     <meta name="theme-color" content="#0B1020">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +58,7 @@
                     <img
                         src="{{ asset('assets/logo/logo160.png') }}"
                         srcset="{{ asset('assets/logo/logo160.png') }} 1x, {{ asset('assets/logo/logo320.png') }} 2x"
-                        alt="ExpoDisplay"
+                        alt="{{ __('common.brand.name') }}"
                         width="160"
                         height="160"
                         class="site-brand-logo block h-auto w-auto object-contain align-middle"
@@ -37,7 +67,7 @@
                         fetchpriority="high"
                     >
                     <span class="font-display text-[9px] font-bold uppercase tracking-[0.26em] text-white/82 sm:text-[10px]">
-                        EXPO DISPLAY
+                        {{ __('common.brand.name') }}
                     </span>
                 </a>
 
@@ -48,7 +78,7 @@
                     aria-controls="mobile-menu"
                     data-menu-toggle
                 >
-                    <span class="sr-only">Menü</span>
+                    <span class="sr-only">{{ __('common.nav.menu') }}</span>
                     <span class="space-y-1.5">
                         <span class="block h-0.5 w-5 bg-current"></span>
                         <span class="block h-0.5 w-5 bg-current"></span>
@@ -56,37 +86,61 @@
                     </span>
                 </button>
 
-                <nav class="hidden items-center gap-2 lg:flex" aria-label="Hauptnavigation">
+                <nav class="hidden items-center gap-2 lg:flex" aria-label="{{ __('common.nav.label') }}">
                     @foreach ([
-                        'features' => 'Vorteile',
-                        'audiences' => 'Einsatzbereiche',
-                        'gallery' => 'Galerie',
-                        'references' => 'Referenzen',
-                        'faq' => 'FAQ',
-                        'contact' => 'Kontakt',
+                        'features' => __('common.nav.features'),
+                        'audiences' => __('common.nav.audiences'),
+                        'gallery' => __('common.nav.gallery'),
+                        'references' => __('common.nav.references'),
+                        'faq' => __('common.nav.faq'),
+                        'contact' => __('common.nav.contact'),
                     ] as $sectionId => $label)
                         <a href="#{{ $sectionId }}" data-scroll-to data-nav-link="{{ $sectionId }}" class="nav-link">
                             {{ $label }}
                         </a>
                     @endforeach
-                    <x-button href="#contact" data-scroll-to class="ml-2">Kostenlose Demo anfragen</x-button>
+                    <x-button href="#contact" data-scroll-to class="ml-2">{{ __('common.cta.demo') }}</x-button>
+                    <details class="language-switcher relative ml-2">
+                        <summary class="language-switcher-trigger" aria-label="{{ __('common.language.active', ['language' => $activeLanguage['label']]) }}">
+                            <span class="flag-badge" aria-hidden="true">{{ $activeLanguage['flag'] }}</span>
+                            <span class="hidden text-[11px] font-semibold uppercase tracking-[0.18em] text-white/82 xl:inline">{{ $activeLanguage['code'] }}</span>
+                        </summary>
+                        <div class="language-switcher-menu">
+                            @foreach ($alternateLocaleCodes as $localeCode)
+                                @php $option = $languageOptions[$localeCode]; @endphp
+                                <a href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }}" class="language-switcher-link {{ $localeCode === $activeLocale ? 'is-active' : '' }}" hreflang="{{ $localeCode }}" @if ($localeCode === $activeLocale) aria-current="true" @endif>
+                                    <span class="flag-badge" aria-hidden="true">{{ $option['flag'] }}</span>
+                                    <span>{{ $option['label'] }}</span>
+                                </a>
+                            @endforeach
+                        </div>
+                    </details>
                 </nav>
             </div>
 
-            <nav id="mobile-menu" class="mobile-nav hidden border-t border-white/5 lg:hidden" aria-label="Mobile Navigation" aria-hidden="true">
+            <nav id="mobile-menu" class="mobile-nav hidden border-t border-white/5 lg:hidden" aria-label="{{ __('common.nav.label') }}" aria-hidden="true">
                 <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-4 sm:px-6">
                     @foreach ([
-                        'features' => 'Vorteile',
-                        'audiences' => 'Einsatzbereiche',
-                        'gallery' => 'Galerie',
-                        'references' => 'Referenzen',
-                        'faq' => 'FAQ',
-                        'contact' => 'Kontakt',
+                        'features' => __('common.nav.features'),
+                        'audiences' => __('common.nav.audiences'),
+                        'gallery' => __('common.nav.gallery'),
+                        'references' => __('common.nav.references'),
+                        'faq' => __('common.nav.faq'),
+                        'contact' => __('common.nav.contact'),
                     ] as $sectionId => $label)
                         <a href="#{{ $sectionId }}" data-scroll-to data-nav-link="{{ $sectionId }}" class="nav-link w-full text-left">
                             {{ $label }}
                         </a>
                     @endforeach
+                    <div class="mt-3 grid gap-2 rounded-2xl border border-white/8 bg-white/[0.03] p-3">
+                        @foreach ($alternateLocaleCodes as $localeCode)
+                            @php $option = $languageOptions[$localeCode]; @endphp
+                            <a href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }}" class="language-switcher-link {{ $localeCode === $activeLocale ? 'is-active' : '' }}" hreflang="{{ $localeCode }}" @if ($localeCode === $activeLocale) aria-current="true" @endif>
+                                <span class="flag-badge" aria-hidden="true">{{ $option['flag'] }}</span>
+                                <span>{{ $option['label'] }}</span>
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
             </nav>
         </header>
@@ -107,26 +161,22 @@
 
                 <div class="mx-auto grid max-w-7xl gap-6 px-5 pb-14 pt-20 sm:gap-10 sm:px-6 sm:py-20 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:px-8 lg:py-28">
                     <div class="relative z-10 flex flex-col justify-center">
-                        <p class="hero-pill" data-hero-seq>Digital Signage mit Wirkung</p>
+                        <p class="hero-pill" data-hero-seq>{{ __('home.hero.pill') }}</p>
                         <h1 class="mt-5 max-w-3xl font-display text-[clamp(1.8rem,5vw,2.2rem)] font-extrabold leading-[1.08] tracking-tight md:text-[clamp(2.2rem,4vw,3.6rem)] md:leading-[1.05]" data-hero-seq>
-                            Digitale Displays, die Aufmerksamkeit in Umsatz verwandeln.
+                            {{ __('home.hero.title') }}
                         </h1>
                         <p class="mt-5 max-w-2xl text-base leading-[1.7] text-muted md:mt-6 md:leading-8" data-hero-seq>
-                            Installation, Content-Management und Support – alles aus einer Hand.
+                            {{ __('home.hero.subtitle') }}
                         </p>
 
                         <div class="hero-cta-group mt-7 flex flex-col gap-3 md:mt-8 md:flex-row" data-hero-seq>
-                            <x-button href="#contact" data-scroll-to>Kostenlose Demo anfragen</x-button>
-                            <x-button href="#contact" variant="outline" data-scroll-to>Jetzt Beratung sichern</x-button>
+                            <x-button href="#contact" data-scroll-to>{{ __('common.cta.demo') }}</x-button>
+                            <x-button href="#contact" variant="outline" data-scroll-to>{{ __('common.cta.consultation') }}</x-button>
                         </div>
-                        <p class="mt-3 text-sm font-medium text-white/72" data-hero-seq>Kostenlos &amp; unverbindlich.</p>
+                        <p class="mt-3 text-sm font-medium text-white/72" data-hero-seq>{{ __('common.cta.microcopy') }}</p>
 
                         <div class="mt-10 grid gap-4 sm:grid-cols-3" data-hero-seq>
-                            @foreach ([
-                                ['label' => 'Mehrere Standorte', 'value' => 'Ein Dashboard'],
-                                ['label' => 'Ausspielung', 'value' => 'Sofort aktualisierbar'],
-                                ['label' => 'Support', 'value' => 'End-to-End'],
-                            ] as $metric)
+                            @foreach (trans('home.hero.metrics') as $metric)
                                 <div class="panel p-4">
                                     <p class="text-xs font-semibold uppercase tracking-[0.24em] text-muted">{{ $metric['label'] }}</p>
                                     <p class="mt-2 text-sm font-semibold text-text">{{ $metric['value'] }}</p>
@@ -149,8 +199,8 @@
                                             <div class="screen-stripe screen-stripe-1" data-kiosk-line></div>
                                             <div class="screen-stripe screen-stripe-2" data-kiosk-line></div>
                                             <div class="screen-banner">
-                                                <span class="screen-chip">Launch Modus</span>
-                                                <strong data-kiosk-text>Leuchtstarker Auftritt im Schaufenster</strong>
+                                                <span class="screen-chip">{{ __('home.hero.kiosk_chip') }}</span>
+                                                <strong data-kiosk-text>{{ __('home.hero.kiosk_text') }}</strong>
                                                 <span class="screen-meter">
                                                     <i data-kiosk-progress></i>
                                                 </span>
@@ -160,7 +210,7 @@
                                                 <div class="screen-mini-card screen-mini-card-alt"></div>
                                             </div>
                                         </div>
-                                        <div class="kiosk-brand">EXPO-DISPLAY.DE</div>
+                                        <div class="kiosk-brand">{{ __('common.brand.device') }}</div>
                                     </div>
                                     <div class="kiosk-shadow"></div>
                                 </div>
@@ -173,9 +223,9 @@
             <section id="features" class="section-space">
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
-                        eyebrow="Warum Wir"
-                        title="Mehr Aufmerksamkeit, schnelle Umsetzung, sauberer Betrieb"
-                        description="Wir gestalten lebendige Screen-Konzepte nicht nur für Optik, sondern für messbare Wirkung am Standort."
+                        :eyebrow="__('home.features.eyebrow')"
+                        :title="__('home.features.title')"
+                        :description="__('home.features.description')"
                     />
 
                     <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4 sm:mt-12" data-animate-group>
@@ -211,13 +261,12 @@
                     </div>
                 </div>
             </section>
-
             <section id="showcase" class="section-space pt-0">
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
-                        eyebrow="STRATEGIE"
-                        title="Drei Strategien, mit denen Displays vor Ort messbar wirken"
-                        description="Nicht nur schöne Screens – sondern klar gesteuerte Aufmerksamkeit, gezielte Besucherführung und flexible Kampagnensteuerung."
+                        :eyebrow="__('home.showcase.eyebrow')"
+                        :title="__('home.showcase.title')"
+                        :description="__('home.showcase.description')"
                         data-animate-item
                     />
 
@@ -266,9 +315,9 @@
             <section id="gallery" class="section-space pt-0">
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
-                        eyebrow="Galerie"
-                        title="Galerie: Echte Vertikal-Spots im Kiosk-Rahmen"
-                        description="Reale MP4-Demos im 9:16-Format – ideal für Messen, Golfclubs und Retail."
+                        :eyebrow="__('home.gallery.eyebrow')"
+                        :title="__('home.gallery.title')"
+                        :description="__('home.gallery.description')"
                     />
 
                     <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4 sm:mt-12 sm:gap-6" data-animate-group>
@@ -295,14 +344,14 @@
                                             </video>
                                             <div class="video-kiosk-reflection"></div>
                                         </div>
-                                        <div class="video-kiosk-brand">EXPO-DISPLAY.DE</div>
+                                        <div class="video-kiosk-brand">{{ __('common.brand.device') }}</div>
                                     </div>
                                 </div>
 
                                 <div class="mt-5 px-2 pb-2">
                                     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{{ $item['label'] }}</p>
                                     <h3 class="mobile-line-clamp-2 mt-2 text-lg font-semibold text-text">{{ $item['title'] }}</h3>
-                                    <p class="mobile-line-clamp-2 mt-2 text-sm leading-7 text-muted">Echter vertikaler MP4-Spot im realitätsnahen Device-Layout für Vor-Ort-Demos.</p>
+                                    <p class="mobile-line-clamp-2 mt-2 text-sm leading-7 text-muted">{{ __('home.gallery.item_description') }}</p>
                                 </div>
                             </article>
                         @endforeach
@@ -314,14 +363,21 @@
                 <div class="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
                     <div>
                         <x-section-title
-                        eyebrow="Referenzen"
-                        title="Der Unterschied, den Teams im Alltag direkt sehen"
-                        description="Das Feedback zeigt nicht nur bessere Optik, sondern auch schnellere Prozesse und mehr Aufmerksamkeit vor Ort."
+                            :eyebrow="__('home.references.eyebrow')"
+                            :title="__('home.references.title')"
+                            :description="__('home.references.description')"
                         />
 
                         <div class="mt-8 space-y-4 sm:mt-10 sm:space-y-5" data-animate-group>
                             @foreach ($testimonials as $testimonial)
                                 <article class="panel p-6" data-animate-item>
+                                    <div class="mb-4 flex items-center gap-1 text-[#FACC15]" aria-label="{{ __('common.references.stars_label') }}">
+                                        @for ($i = 0; $i < 5; $i++)
+                                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81H7.03a1 1 0 00.95-.69l1.07-3.292z"/>
+                                            </svg>
+                                        @endfor
+                                    </div>
                                     <p class="text-sm leading-7 text-white/90">"{{ $testimonial['quote'] }}"</p>
                                     <div class="mt-5">
                                         <p class="font-semibold text-text">{{ $testimonial['name'] }}</p>
@@ -334,7 +390,7 @@
 
                     <div class="relative">
                         <div class="stats-shell panel p-6 md:p-8" data-animate-group>
-                            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-primary" data-animate-item>Ergebnisse vor Ort</p>
+                            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-primary" data-animate-item>{{ __('common.references.results_eyebrow') }}</p>
                             <div class="mt-6 space-y-5">
                                 @foreach ($stats as $stat)
                                     <div class="stat-card rounded-3xl border border-white/10 bg-surface-2 p-5" data-animate-item>
@@ -356,13 +412,12 @@
                     </div>
                 </div>
             </section>
-
             <section id="faq" class="section-space pt-0">
                 <div class="mx-auto max-w-4xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
-                        eyebrow="FAQ"
-                        title="Die häufigsten Fragen vor der Entscheidung"
-                        description="Kurze, klare Antworten zu Ablauf, Installation und Content-Verwaltung."
+                        :eyebrow="__('common.faq.eyebrow')"
+                        :title="__('common.faq.title')"
+                        :description="__('common.faq.description')"
                         align="center"
                     />
 
@@ -377,9 +432,9 @@
             <section id="audiences" class="section-space pt-0">
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
-                        eyebrow="Zielgruppen"
-                        title="Für wen ist ExpoDisplay ideal?"
-                        description="Unsere Display-Lösungen sind speziell entwickelt für stark frequentierte Standorte mit hohem Anspruch an Markenwirkung."
+                        :eyebrow="__('home.audiences.eyebrow')"
+                        :title="__('home.audiences.title')"
+                        :description="__('home.audiences.description')"
                     />
 
                     <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3" data-animate-group>
@@ -430,45 +485,45 @@
                 <div class="mx-auto grid max-w-7xl gap-8 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
                     <div class="panel p-6 md:p-8">
                         <x-section-title
-                        eyebrow="Kontakt"
-                        title="Planen wir gemeinsam die passende Display-Lösung für Ihr Projekt"
-                        description="Senden Sie uns eine kurze Zusammenfassung. Unser Team erstellt die passende Struktur für Setup, Ablauf und Angebot."
+                            :eyebrow="__('common.contact.eyebrow')"
+                            :title="__('common.contact.title')"
+                            :description="__('common.contact.description')"
                         />
-                        <p class="mt-4 text-sm font-medium text-white/72">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+                        <p class="mt-4 text-sm font-medium text-white/72">{{ __('common.contact.response_time') }}</p>
 
                         <div class="mt-8 space-y-5 text-sm text-muted">
                             <div>
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Adresse</p>
-                                <p class="mt-2">Beispielstraße 12, 10115 Berlin</p>
+                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{{ __('common.contact.info.address') }}</p>
+                                <p class="mt-2">{{ __('common.contact.info.address_value') }}</p>
                             </div>
                             <div>
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Telefon</p>
-                                <p class="mt-2"><a href="tel:+900000000000" class="transition hover:text-text">+90 000 000 00 00</a></p>
+                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{{ __('common.contact.info.phone') }}</p>
+                                <p class="mt-2"><a href="tel:{{ preg_replace('/\s+/', '', __('common.contact.info.phone_value')) }}" class="transition hover:text-text">{{ __('common.contact.info.phone_value') }}</a></p>
                             </div>
                             <div>
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">E-Mail</p>
-                                <p class="mt-2"><a href="mailto:hello@example.com" class="transition hover:text-text">hello@example.com</a></p>
+                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{{ __('common.contact.info.email') }}</p>
+                                <p class="mt-2"><a href="mailto:{{ __('common.contact.info.email_value') }}" class="transition hover:text-text">{{ __('common.contact.info.email_value') }}</a></p>
                             </div>
                             <div>
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Öffnungszeiten</p>
-                                <p class="mt-2">Mo. bis Fr. 09:00 - 18:00</p>
+                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{{ __('common.contact.info.hours') }}</p>
+                                <p class="mt-2">{{ __('common.contact.info.hours_value') }}</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="panel p-6 md:p-8">
-                        <form method="POST" action="{{ route('contact.store') }}" class="space-y-5" data-contact-form>
+                        <form method="POST" action="{{ route('contact.store', ['lang' => $activeLocale]) }}" class="space-y-5" data-contact-form>
                             @csrf
                             <div class="grid gap-5 md:grid-cols-2">
                                 <div>
-                                    <label for="name" class="form-label">Name</label>
+                                    <label for="name" class="form-label">{{ __('common.contact.labels.name') }}</label>
                                     <input id="name" name="name" type="text" value="{{ old('name') }}" class="form-input" required>
                                     @error('name')
                                         <p class="form-error">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div>
-                                    <label for="company" class="form-label">Unternehmen</label>
+                                    <label for="company" class="form-label">{{ __('common.contact.labels.company') }}</label>
                                     <input id="company" name="company" type="text" value="{{ old('company') }}" class="form-input">
                                     @error('company')
                                         <p class="form-error">{{ $message }}</p>
@@ -478,14 +533,14 @@
 
                             <div class="grid gap-5 md:grid-cols-2">
                                 <div>
-                                    <label for="email" class="form-label">E-Mail</label>
+                                    <label for="email" class="form-label">{{ __('common.contact.labels.email') }}</label>
                                     <input id="email" name="email" type="email" value="{{ old('email') }}" class="form-input" required>
                                     @error('email')
                                         <p class="form-error">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div>
-                                    <label for="phone" class="form-label">Telefon</label>
+                                    <label for="phone" class="form-label">{{ __('common.contact.labels.phone') }}</label>
                                     <input id="phone" name="phone" type="text" value="{{ old('phone') }}" class="form-input">
                                     @error('phone')
                                         <p class="form-error">{{ $message }}</p>
@@ -494,12 +549,12 @@
                             </div>
 
                             <div class="hidden" aria-hidden="true">
-                                <label for="website">Website</label>
+                                <label for="website">{{ __('common.contact.labels.website') }}</label>
                                 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
                             </div>
 
                             <div>
-                                <label for="message" class="form-label">Nachricht</label>
+                                <label for="message" class="form-label">{{ __('common.contact.labels.message') }}</label>
                                 <textarea id="message" name="message" rows="5" class="form-input min-h-[140px] resize-y" required>{{ old('message') }}</textarea>
                                 @error('message')
                                     <p class="form-error">{{ $message }}</p>
@@ -507,8 +562,8 @@
                             </div>
 
                             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                                <p class="text-sm text-muted">Ihre Anfrage wird gespeichert und unser Team meldet sich zeitnah bei Ihnen.</p>
-                                <x-button type="submit">Kostenlose Demo anfragen</x-button>
+                                <p class="text-sm text-muted">{{ __('common.contact.summary') }}</p>
+                                <x-button type="submit">{{ __('common.cta.demo') }}</x-button>
                             </div>
                         </form>
                     </div>
@@ -519,24 +574,24 @@
         <footer class="border-t border-white/5 py-8">
             <div class="mx-auto flex max-w-7xl flex-col gap-5 px-5 text-sm text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
                 <div class="flex flex-wrap items-center gap-4">
-                    <a href="#features" data-scroll-to class="transition hover:text-text">Vorteile</a>
-                    <a href="#gallery" data-scroll-to class="transition hover:text-text">Galerie</a>
-                    <a href="#contact" data-scroll-to class="transition hover:text-text">Kontakt</a>
+                    <a href="#features" data-scroll-to class="transition hover:text-text">{{ __('common.nav.features') }}</a>
+                    <a href="#gallery" data-scroll-to class="transition hover:text-text">{{ __('common.nav.gallery') }}</a>
+                    <a href="#contact" data-scroll-to class="transition hover:text-text">{{ __('common.nav.contact') }}</a>
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <a href="#" class="social-link" aria-label="Instagram">
+                    <a href="#" class="social-link" aria-label="{{ __('common.footer.instagram') }}">
                         <span>IG</span>
                     </a>
-                    <a href="#" class="social-link" aria-label="LinkedIn">
+                    <a href="#" class="social-link" aria-label="{{ __('common.footer.linkedin') }}">
                         <span>IN</span>
                     </a>
-                    <a href="#" class="social-link" aria-label="X">
+                    <a href="#" class="social-link" aria-label="{{ __('common.footer.x') }}">
                         <span>X</span>
                     </a>
                 </div>
 
-                <p>&copy; {{ now()->year }} EXPO DISPLAY</p>
+                <p>&copy; {{ now()->year }} {{ __('common.brand.name') }}</p>
             </div>
         </footer>
     </div>

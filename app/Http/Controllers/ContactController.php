@@ -11,10 +11,12 @@ class ContactController extends Controller
 {
     public function store(Request $request): RedirectResponse
     {
+        $redirectParameters = ['lang' => app()->getLocale()];
+
         if ($request->filled('website')) {
             return redirect()
-                ->route('home')
-                ->with('status', 'Ihre Anfrage wurde übermittelt. Wir melden uns in Kürze bei Ihnen.');
+                ->route('home', $redirectParameters)
+                ->with('status', __('common.contact.status_success'));
         }
 
         $validated = $request->validate([
@@ -24,17 +26,17 @@ class ContactController extends Controller
             'phone' => ['nullable', 'string', 'max:40'],
             'message' => ['required', 'string', 'min:12', 'max:2000'],
         ], [
-            'required' => 'Bitte füllen Sie das Feld :attribute aus.',
-            'email' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
-            'min' => 'Das Feld :attribute muss mindestens :min Zeichen enthalten.',
-            'max' => 'Das Feld :attribute darf höchstens :max Zeichen enthalten.',
-            'string' => 'Das Feld :attribute muss ein Textwert sein.',
+            'required' => __('common.contact.validation.required'),
+            'email' => __('common.contact.validation.email'),
+            'min' => __('common.contact.validation.min'),
+            'max' => __('common.contact.validation.max'),
+            'string' => __('common.contact.validation.string'),
         ], [
-            'name' => 'name',
-            'company' => 'unternehmen',
-            'email' => 'e-mail',
-            'phone' => 'telefon',
-            'message' => 'nachricht',
+            'name' => __('common.contact.attributes.name'),
+            'company' => __('common.contact.attributes.company'),
+            'email' => __('common.contact.attributes.email'),
+            'phone' => __('common.contact.attributes.phone'),
+            'message' => __('common.contact.attributes.message'),
         ]);
 
         $lead = Lead::create($validated);
@@ -49,7 +51,7 @@ class ContactController extends Controller
         ]));
 
         return redirect()
-            ->route('home')
-            ->with('status', 'Ihre Anfrage wurde übermittelt. Wir melden uns in Kürze bei Ihnen.');
+            ->route('home', $redirectParameters)
+            ->with('status', __('common.contact.status_success'));
     }
 }
