@@ -226,7 +226,7 @@
                 </div>
             </section>
 
-            <section id="features" class="section-space">
+            <section id="features" class="section-space pb-10 sm:pb-14">
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
                         :eyebrow="__('home.features.eyebrow')"
@@ -267,7 +267,7 @@
                     </div>
                 </div>
             </section>
-            <section id="showcase" class="section-space pt-0">
+            <section id="showcase" class="section-space pt-0 pb-12 sm:pb-16">
                 <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
                     <x-section-title
                         :eyebrow="__('home.showcase.eyebrow')"
@@ -276,7 +276,7 @@
                         data-animate-item
                     />
 
-                    <div class="mt-6 grid gap-5 lg:grid-cols-3 sm:mt-8 sm:gap-6" data-animate-group data-animate-stagger="150" data-animate-duration="600">
+                    <div class="mt-4 grid gap-5 lg:grid-cols-3 sm:mt-6 sm:gap-6" data-animate-group data-animate-stagger="150" data-animate-duration="600">
                         @foreach ($showcases as $item)
                             <article class="showcase-card panel overflow-hidden p-5 md:p-6" data-animate-item>
                                 <div class="screen-stage js-parallax" data-parallax-speed="16">
@@ -292,7 +292,7 @@
                                                     <div class="strategy-screen-stripe" data-strategy-line></div>
                                                     <div class="strategy-screen-stripe strategy-screen-stripe-short" data-strategy-line></div>
                                                     <div class="strategy-screen-banner">
-                                                        <span class="strategy-screen-chip">{{ $item['eyebrow'] }}</span>
+                                                        <span class="strategy-screen-chip" aria-hidden="true"></span>
                                                         <span class="strategy-screen-meter">
                                                             <i data-strategy-progress></i>
                                                         </span>
