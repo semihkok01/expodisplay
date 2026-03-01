@@ -62,11 +62,11 @@ return [
         ],
         'info' => [
             'address' => 'Adres',
-            'address_value' => 'Voorbeeldstraat 12, 10115 Berlijn',
+            'address_value' => 'Hochallee 11, 20148 Hamburg',
             'phone' => 'Telefoon',
             'phone_value' => '+90 000 000 00 00',
             'email' => 'E-mail',
-            'email_value' => 'hello@example.com',
+            'email_value' => 'info@expo-display.de',
             'hours' => 'Openingstijden',
             'hours_value' => 'Ma. t/m vr. 09:00 - 18:00',
         ],

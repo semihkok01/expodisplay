@@ -62,11 +62,11 @@ return [
         ],
         'info' => [
             'address' => 'Address',
-            'address_value' => 'Sample Street 12, 10115 Berlin',
+            'address_value' => 'Hochallee 11, 20148 Hamburg',
             'phone' => 'Phone',
             'phone_value' => '+90 000 000 00 00',
             'email' => 'Email',
-            'email_value' => 'hello@example.com',
+            'email_value' => 'info@expo-display.de',
             'hours' => 'Opening Hours',
             'hours_value' => 'Mon. to Fri. 09:00 - 18:00',
         ],
