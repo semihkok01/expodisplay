@@ -110,6 +110,38 @@ class HomeController extends Controller
                     'label' => 'Display 04',
                 ],
             ],
+            'audiences' => [
+                [
+                    'icon' => 'booth',
+                    'title' => 'Messen',
+                    'text' => 'Ideal für starke Erstkontakte, Produktpräsentationen und Lead-Erfassung am Stand.',
+                ],
+                [
+                    'icon' => 'flag',
+                    'title' => 'Golfclubs',
+                    'text' => 'Perfekt für Greenfee-Kommunikation, Events, Sponsorenflächen und Club-Services.',
+                ],
+                [
+                    'icon' => 'store',
+                    'title' => 'Retail-Flächen',
+                    'text' => 'Für mehr Sichtbarkeit am POS, klare Kampagnenführung und messbare Frequenzwirkung.',
+                ],
+                [
+                    'icon' => 'frame',
+                    'title' => 'Showrooms',
+                    'text' => 'Stärkt Premium-Präsentationen mit kontrollierter Markeninszenierung im Raum.',
+                ],
+                [
+                    'icon' => 'bed',
+                    'title' => 'Hotels',
+                    'text' => 'Für Gäste-Informationen, Event-Hinweise und hochwertige digitale Empfangspunkte.',
+                ],
+                [
+                    'icon' => 'cross',
+                    'title' => 'Krankenhäuser',
+                    'text' => 'Unterstützt Besucherführung, Informationsausgabe und klare Kommunikation im Alltag.',
+                ],
+            ],
             'testimonials' => [
                 [
                     'quote' => 'Im neuen Kampagnenzeitraum wurde der Schaufenster-Traffic deutlich zielgerichteter. Das Screen-Konzept hat den Einstieg in den Store spürbar erhöht.',

@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EXPO DISPLAY | Premium Digital-Signage Erlebnis</title>
-    <meta name="description" content="Bringen Sie Ihre Marke mit aufmerksamkeitsstarken Display-Lösungen nach vorn. Installation, Content-Management und Support aus einer Hand.">
-    <meta property="og:title" content="EXPO DISPLAY">
-    <meta property="og:description" content="Ein schneller, premium gestalteter One-Page-Auftritt für moderne Werbedisplays.">
+    <title>Digitale Werbedisplays für Messe &amp; Golfanlagen | ExpoDisplay</title>
+    <meta name="description" content="Premium Digital Signage Lösungen für Messen, Golfclubs, Retail-Flächen, Showrooms, Hotels und Krankenhäuser. Installation, Content-Management und Support aus einer Hand.">
+    <meta property="og:title" content="Digitale Werbedisplays für Messe &amp; Golfanlagen | ExpoDisplay">
+    <meta property="og:description" content="Premium Digital Signage Lösungen für Messen, Golfclubs, Retail-Flächen, Showrooms, Hotels und Krankenhäuser. Installation, Content-Management und Support aus einer Hand.">
     <meta property="og:image" content="{{ url('/assets/og-placeholder.svg') }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url('/') }}">
@@ -57,7 +57,7 @@
                             {{ $label }}
                         </a>
                     @endforeach
-                    <x-button href="#contact" data-scroll-to class="ml-2">Angebot Anfordern</x-button>
+                    <x-button href="#contact" data-scroll-to class="ml-2">Jetzt Beratung sichern</x-button>
                 </nav>
             </div>
 
@@ -96,16 +96,17 @@
                     <div class="relative z-10 flex flex-col justify-center">
                         <p class="hero-pill" data-hero-seq>Digital Signage mit Wirkung</p>
                         <h1 class="mt-5 max-w-3xl font-display text-[clamp(2.2rem,4vw,3.6rem)] font-extrabold leading-[1.05] tracking-tight" data-hero-seq>
-                            Bringen Sie Ihre Marke mit starken Display-Lösungen nach vorn.
+                            Digitale Displays, die Aufmerksamkeit in Umsatz verwandeln.
                         </h1>
                         <p class="mt-6 max-w-2xl text-base leading-8 text-muted" data-hero-seq>
-                            Mit aufmerksamkeitsstarken Display-Lösungen wird Ihre Marke sichtbarer. Installation, Content-Management und Support in einem Paket.
+                            Installation, Content-Management und Support – alles aus einer Hand.
                         </p>
 
                         <div class="mt-8 flex flex-col gap-3 sm:flex-row" data-hero-seq>
-                            <x-button href="#contact" data-scroll-to>Angebot Anfordern</x-button>
-                    <x-button href="#showcase" variant="outline" data-scroll-to>Demo ansehen</x-button>
+                            <x-button href="#contact" data-scroll-to>Jetzt Beratung sichern</x-button>
+                            <x-button href="#contact" variant="outline" data-scroll-to>Kostenlose Demo anfragen</x-button>
                         </div>
+                        <p class="mt-3 text-sm font-medium text-white/72" data-hero-seq>Kostenlos &amp; unverbindlich.</p>
 
                         <div class="mt-10 grid gap-4 sm:grid-cols-3" data-hero-seq>
                             @foreach ([
@@ -366,6 +367,58 @@
                 </div>
             </section>
 
+            <section id="audiences" class="section-space pt-0">
+                <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+                    <x-section-title
+                        eyebrow="Zielgruppen"
+                        title="Für wen ist ExpoDisplay ideal?"
+                        description="Unsere Display-Lösungen sind speziell entwickelt für stark frequentierte Standorte mit hohem Anspruch an Markenwirkung."
+                    />
+
+                    <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3" data-animate-group>
+                        @foreach ($audiences as $audience)
+                            <article class="feature-card panel p-6 js-tilt" data-animate-item>
+                                <div class="feature-icon">
+                                    @switch($audience['icon'])
+                                        @case('booth')
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
+                                                <path d="M4 9h16M6 9V6h12v3M6 9v9M18 9v9M9 13h6M9 18h6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            @break
+                                        @case('flag')
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
+                                                <path d="M6 21V4m0 0c3-2 6 2 9 0s6 2 6 2v8s-3-2-6-2-6 2-9 0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            @break
+                                        @case('store')
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
+                                                <path d="M4 10l1.5-5h13L20 10M5 10v9h14v-9M9 14h6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            @break
+                                        @case('frame')
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
+                                                <path d="M5 5h14v14H5zM9 9h6v6H9z" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            @break
+                                        @case('bed')
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
+                                                <path d="M4 18v-7h16v7M7 11V8h4v3M4 15h16" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            @break
+                                        @default
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
+                                                <path d="M12 4v16M4 12h16M7.5 7.5h9v9h-9z" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                    @endswitch
+                                </div>
+                                <h3 class="mt-5 text-lg font-semibold text-text">{{ $audience['title'] }}</h3>
+                                <p class="mt-3 text-sm leading-7 text-muted">{{ $audience['text'] }}</p>
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+
             <section id="contact" class="section-space pt-0">
                 <div class="mx-auto grid max-w-7xl gap-8 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
                     <div class="panel p-6 md:p-8">
@@ -374,6 +427,7 @@
                         title="Planen wir gemeinsam die passende Display-Lösung für Ihr Projekt"
                         description="Senden Sie uns eine kurze Zusammenfassung. Unser Team erstellt die passende Struktur für Setup, Ablauf und Angebot."
                         />
+                        <p class="mt-4 text-sm font-medium text-white/72">Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
 
                         <div class="mt-8 space-y-5 text-sm text-muted">
                             <div>
@@ -447,7 +501,7 @@
 
                             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                                 <p class="text-sm text-muted">Ihre Anfrage wird gespeichert und unser Team meldet sich zeitnah bei Ihnen.</p>
-                                <x-button type="submit">Angebot Anfordern</x-button>
+                                <x-button type="submit">Jetzt Beratung sichern</x-button>
                             </div>
                         </form>
                     </div>
@@ -461,7 +515,7 @@
             class="floating-cta"
             aria-label="Direkt zum Angebotsformular"
         >
-            Angebot Anfordern
+            Jetzt Beratung sichern
         </a>
 
         <footer class="border-t border-white/5 py-8">
