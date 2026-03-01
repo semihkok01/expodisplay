@@ -24,17 +24,20 @@
     <div class="page-shell relative overflow-x-clip">
         <header id="top" class="sticky top-0 z-50 border-b border-white/5 bg-[rgba(11,16,32,0.95)]">
             <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-                <a href="#top" data-scroll-to class="flex items-center">
+                <a href="#top" data-scroll-to class="flex shrink-0 flex-col items-start justify-center gap-1 leading-none">
                     <img
                         src="{{ asset('assets/logo/logo160.png') }}"
                         srcset="{{ asset('assets/logo/logo160.png') }} 1x, {{ asset('assets/logo/logo320.png') }} 2x"
                         alt="ExpoDisplay"
                         width="160"
                         height="160"
-                        class="block h-auto max-h-[42px] w-auto object-contain align-middle"
+                        class="block h-auto max-h-[28px] w-auto object-contain align-middle sm:max-h-[34px]"
                         decoding="async"
                         fetchpriority="high"
                     >
+                    <span class="font-display text-[9px] font-bold uppercase tracking-[0.26em] text-white/82 sm:text-[10px]">
+                        EXPO DISPLAY
+                    </span>
                 </a>
 
                 <button
