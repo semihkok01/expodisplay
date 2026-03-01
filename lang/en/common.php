@@ -58,6 +58,7 @@ return [
             'email' => 'Email',
             'phone' => 'Phone',
             'message' => 'Message',
+            'captcha' => 'Security question',
             'website' => 'Website',
         ],
         'info' => [
@@ -76,6 +77,7 @@ return [
             'min' => 'The :attribute field must contain at least :min characters.',
             'max' => 'The :attribute field may not exceed :max characters.',
             'string' => 'The :attribute field must be text.',
+            'captcha_invalid' => 'Please solve the math question correctly.',
         ],
         'attributes' => [
             'name' => 'name',
@@ -83,6 +85,10 @@ return [
             'email' => 'email',
             'phone' => 'phone',
             'message' => 'message',
+            'captcha_answer' => 'security question',
+        ],
+        'captcha' => [
+            'prompt' => 'Quick check: :first + :second = ?',
         ],
     ],
     'footer' => [

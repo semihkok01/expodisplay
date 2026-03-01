@@ -590,6 +590,27 @@
                                 @enderror
                             </div>
 
+                            <div>
+                                <label for="captcha_answer" class="form-label">
+                                    {{ __('common.contact.labels.captcha') }}
+                                </label>
+                                <p class="mb-3 text-sm text-white/72">
+                                    {{ __('common.contact.captcha.prompt', ['first' => $contactChallenge['first'], 'second' => $contactChallenge['second']]) }}
+                                </p>
+                                <input
+                                    id="captcha_answer"
+                                    name="captcha_answer"
+                                    type="text"
+                                    inputmode="numeric"
+                                    value="{{ old('captcha_answer') }}"
+                                    class="form-input"
+                                    required
+                                >
+                                @error('captcha_answer')
+                                    <p class="form-error">{{ $message }}</p>
+                                @enderror
+                            </div>
+
                             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                                 <p class="text-sm text-muted">{{ __('common.contact.summary') }}</p>
                                 <x-button type="submit">{{ __('common.cta.demo') }}</x-button>

@@ -58,6 +58,7 @@ return [
             'email' => 'E-mail',
             'phone' => 'Telefoon',
             'message' => 'Bericht',
+            'captcha' => 'Beveiligingsvraag',
             'website' => 'Website',
         ],
         'info' => [
@@ -76,6 +77,7 @@ return [
             'min' => 'Het veld :attribute moet minimaal :min tekens bevatten.',
             'max' => 'Het veld :attribute mag maximaal :max tekens bevatten.',
             'string' => 'Het veld :attribute moet tekst zijn.',
+            'captcha_invalid' => 'Los de rekensom correct op.',
         ],
         'attributes' => [
             'name' => 'naam',
@@ -83,6 +85,10 @@ return [
             'email' => 'e-mail',
             'phone' => 'telefoon',
             'message' => 'bericht',
+            'captcha_answer' => 'beveiligingsvraag',
+        ],
+        'captcha' => [
+            'prompt' => 'Los dit kort op: :first + :second = ?',
         ],
     ],
     'footer' => [

@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        if (! $request->session()->has('contact_challenge')) {
+            $first = random_int(2, 9);
+            $second = random_int(1, 6);
+
+            $request->session()->put('contact_challenge', [
+                'first' => $first,
+                'second' => $second,
+                'answer' => $first + $second,
+            ]);
+        }
+
         $galleryItems = trans('home.gallery.items');
         $videoSources = [
             asset('assets/videos/screen_01.mp4'),
@@ -32,6 +44,7 @@ class HomeController extends Controller
             'testimonials' => trans('home.references.testimonials'),
             'stats' => trans('home.references.stats'),
             'faqs' => trans('home.faq.items'),
+            'contactChallenge' => $request->session()->get('contact_challenge'),
         ]);
     }
 }

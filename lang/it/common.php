@@ -58,6 +58,7 @@ return [
             'email' => 'E-mail',
             'phone' => 'Telefono',
             'message' => 'Messaggio',
+            'captcha' => 'Domanda di sicurezza',
             'website' => 'Sito web',
         ],
         'info' => [
@@ -76,6 +77,7 @@ return [
             'min' => 'Il campo :attribute deve contenere almeno :min caratteri.',
             'max' => 'Il campo :attribute non può superare :max caratteri.',
             'string' => 'Il campo :attribute deve essere testo.',
+            'captcha_invalid' => 'Risolvete correttamente il calcolo.',
         ],
         'attributes' => [
             'name' => 'nome',
@@ -83,6 +85,10 @@ return [
             'email' => 'e-mail',
             'phone' => 'telefono',
             'message' => 'messaggio',
+            'captcha_answer' => 'domanda di sicurezza',
+        ],
+        'captcha' => [
+            'prompt' => 'Controllo rapido: :first + :second = ?',
         ],
     ],
     'footer' => [
