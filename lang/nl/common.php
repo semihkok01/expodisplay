@@ -12,6 +12,7 @@ return [
     'nav' => [
         'label' => 'Hoofdnavigatie',
         'menu' => 'Menu',
+        'home' => 'Home',
         'features' => 'Voordelen',
         'audiences' => 'Toepassingen',
         'gallery' => 'Galerij',

@@ -87,6 +87,9 @@
                 </button>
 
                 <nav class="hidden items-center gap-2 lg:flex" aria-label="{{ __('common.nav.label') }}">
+                    <a href="#top" data-scroll-to class="nav-link">
+                        {{ __('common.nav.home') }}
+                    </a>
                     @foreach ([
                         'features' => __('common.nav.features'),
                         'audiences' => __('common.nav.audiences'),
@@ -120,6 +123,9 @@
 
             <nav id="mobile-menu" class="mobile-nav hidden border-t border-white/5 lg:hidden" aria-label="{{ __('common.nav.label') }}" aria-hidden="true">
                 <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-4 sm:px-6">
+                    <a href="#top" data-scroll-to class="nav-link w-full text-left">
+                        {{ __('common.nav.home') }}
+                    </a>
                     @foreach ([
                         'features' => __('common.nav.features'),
                         'audiences' => __('common.nav.audiences'),

@@ -12,6 +12,7 @@ return [
     'nav' => [
         'label' => 'Main navigation',
         'menu' => 'Menu',
+        'home' => 'Home',
         'features' => 'Benefits',
         'audiences' => 'Use Cases',
         'gallery' => 'Gallery',

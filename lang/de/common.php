@@ -12,6 +12,7 @@ return [
     'nav' => [
         'label' => 'Hauptnavigation',
         'menu' => 'Menü',
+        'home' => 'Home',
         'features' => 'Vorteile',
         'audiences' => 'Einsatzbereiche',
         'gallery' => 'Galerie',
