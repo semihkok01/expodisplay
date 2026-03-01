@@ -1,6 +1,6 @@
 <section id="device-3d" class="section-space pt-0">
-    <div class="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-stretch lg:gap-6">
+    <div class="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:items-stretch md:gap-6">
             <div>
                 <div class="device-viewer-shell panel overflow-hidden p-3 sm:p-4">
                     <div

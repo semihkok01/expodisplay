@@ -731,18 +731,20 @@
                     outerFrame.receiveShadow = true;
                     group.add(outerFrame);
 
-                    const frontPlaneZ = -(kioskDepthBottom * 0.5) + 0.11;
+                    const panelDepthBottom = kioskDepthBottom - 0.22;
+                    const panelDepthTop = kioskDepthTop - 0.1;
+                    const frontPlaneZ = -(panelDepthBottom * 0.5) + 0.08;
 
-                    const whitePanel = createRoundedPanel(kioskWidth - 0.3, kioskHeight - 0.3, 0.1, 0.18, panelMaterial);
-                    whitePanel.position.z = frontPlaneZ;
+                    const whitePanel = createWedgeBody(kioskWidth - 0.26, kioskHeight - 0.26, panelDepthBottom, panelDepthTop, panelMaterial);
+                    whitePanel.position.set(0, 0, -0.02);
                     group.add(whitePanel);
 
-                    const screenFrame = createRoundedPanel(kioskWidth - 0.9, kioskHeight - 1.92, 0.08, 0.1, frameMaterial);
-                    screenFrame.position.set(0, -0.06, frontPlaneZ + 0.07);
+                    const screenFrame = createRoundedPanel(kioskWidth - 0.88, kioskHeight - 1.9, 0.06, 0.1, frameMaterial);
+                    screenFrame.position.set(0, -0.06, frontPlaneZ + 0.06);
                     group.add(screenFrame);
 
-                    const screen = createRoundedPanel(kioskWidth - 1.12, kioskHeight - 2.18, 0.04, 0.08, screenMaterial);
-                    screen.position.set(0, -0.08, frontPlaneZ + 0.12);
+                    const screen = createRoundedPanel(kioskWidth - 1.08, kioskHeight - 2.12, 0.04, 0.08, screenMaterial);
+                    screen.position.set(0, -0.08, frontPlaneZ + 0.1);
                     group.add(screen);
 
                     const gloss = new THREE.Mesh(
@@ -754,12 +756,12 @@
                             side: THREE.DoubleSide,
                         })
                     );
-                    gloss.position.set(-0.12, 0.18, frontPlaneZ + 0.16);
+                    gloss.position.set(-0.12, 0.18, frontPlaneZ + 0.13);
                     gloss.rotation.y = -0.08;
                     group.add(gloss);
 
                     const sensor = createRoundedPanel(0.72, 0.14, 0.06, 0.05, frameMaterial);
-                    sensor.position.set(0, kioskHeight / 2 - 0.6, frontPlaneZ + 0.11);
+                    sensor.position.set(0, kioskHeight / 2 - 0.6, frontPlaneZ + 0.09);
                     group.add(sensor);
 
                     const lens = new THREE.Mesh(
@@ -770,7 +772,7 @@
                             emissiveIntensity: 0.18,
                         })
                     );
-                    lens.position.set(-0.18, kioskHeight / 2 - 0.6, frontPlaneZ + 0.14);
+                    lens.position.set(-0.18, kioskHeight / 2 - 0.6, frontPlaneZ + 0.12);
                     group.add(lens);
 
                     const sideSlot = new THREE.Mesh(
@@ -792,7 +794,7 @@
                             opacity: 0.1,
                         })
                     );
-                    baseShadow.position.set(0, -kioskHeight / 2 + 0.2, frontPlaneZ + 0.065);
+                    baseShadow.position.set(0, -kioskHeight / 2 + 0.2, frontPlaneZ + 0.045);
                     group.add(baseShadow);
 
                     group.rotation.x = -0.12;
