@@ -46,6 +46,19 @@ return [
             ['title' => 'Dynamic Store Campaign', 'label' => 'Display 04'],
         ],
     ],
+    'device' => [
+        'eyebrow' => '3D VIEW',
+        'title' => 'ExpoDisplay Kiosk – 3D View & Dimensions',
+        'description' => 'Rotate the device and see the dimensions at a glance.',
+        'dimensions_title' => 'Dimensions (cm)',
+        'dimensions' => [
+            ['label' => 'Height', 'value' => '128.5 cm'],
+            ['label' => 'Width', 'value' => '76 cm'],
+            ['label' => 'Depth', 'value' => '50 cm'],
+        ],
+        'summary' => 'For trade shows, golf clubs, retail, showrooms, hotels and hospitals.',
+        'aria' => '3D view of the ExpoDisplay kiosk',
+    ],
     'references' => [
         'eyebrow' => 'References',
         'title' => 'The difference teams notice in daily operations',

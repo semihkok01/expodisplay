@@ -46,6 +46,19 @@ return [
             ['title' => 'Dynamische winkelcampagne', 'label' => 'Display 04'],
         ],
     ],
+    'device' => [
+        'eyebrow' => '3D WEERGAVE',
+        'title' => 'ExpoDisplay Kiosk – 3D weergave & afmetingen',
+        'description' => 'Draai het apparaat en bekijk de afmetingen in één oogopslag.',
+        'dimensions_title' => 'Afmetingen (cm)',
+        'dimensions' => [
+            ['label' => 'Hoogte', 'value' => '128,5 cm'],
+            ['label' => 'Breedte', 'value' => '76 cm'],
+            ['label' => 'Diepte', 'value' => '50 cm'],
+        ],
+        'summary' => 'Voor beurzen, golfclubs, retail, showrooms, hotels en ziekenhuizen.',
+        'aria' => '3D-weergave van de ExpoDisplay kiosk',
+    ],
     'references' => [
         'eyebrow' => 'Referenties',
         'title' => 'Het verschil dat teams dagelijks direct merken',

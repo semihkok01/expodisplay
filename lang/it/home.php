@@ -46,6 +46,19 @@ return [
             ['title' => 'Campagna store dinamica', 'label' => 'Display 04'],
         ],
     ],
+    'device' => [
+        'eyebrow' => 'VISTA 3D',
+        'title' => 'ExpoDisplay Kiosk – vista 3D e misure',
+        'description' => 'Ruotate il dispositivo e visualizzate subito le dimensioni.',
+        'dimensions_title' => 'Misure (cm)',
+        'dimensions' => [
+            ['label' => 'Altezza', 'value' => '128,5 cm'],
+            ['label' => 'Larghezza', 'value' => '76 cm'],
+            ['label' => 'Profondità', 'value' => '50 cm'],
+        ],
+        'summary' => 'Per fiere, golf club, retail, showroom, hotel e ospedali.',
+        'aria' => 'Vista 3D del kiosk ExpoDisplay',
+    ],
     'references' => [
         'eyebrow' => 'Referenze',
         'title' => 'La differenza che i team notano ogni giorno',

@@ -46,6 +46,19 @@ return [
             ['title' => 'Campagne magasin dynamique', 'label' => 'Display 04'],
         ],
     ],
+    'device' => [
+        'eyebrow' => 'VUE 3D',
+        'title' => 'Kiosque ExpoDisplay – vue 3D & dimensions',
+        'description' => 'Faites pivoter l’appareil et voyez les dimensions en un coup d’œil.',
+        'dimensions_title' => 'Dimensions (cm)',
+        'dimensions' => [
+            ['label' => 'Hauteur', 'value' => '128,5 cm'],
+            ['label' => 'Largeur', 'value' => '76 cm'],
+            ['label' => 'Profondeur', 'value' => '50 cm'],
+        ],
+        'summary' => 'Pour salons, clubs de golf, retail, showrooms, hôtels et hôpitaux.',
+        'aria' => 'Vue 3D du kiosque ExpoDisplay',
+    ],
     'references' => [
         'eyebrow' => 'Références',
         'title' => 'La différence que les équipes constatent au quotidien',

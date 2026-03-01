@@ -46,6 +46,19 @@ return [
             ['title' => 'Dynamische Store-Kampagne', 'label' => 'Display 04'],
         ],
     ],
+    'device' => [
+        'eyebrow' => '3D ANSICHT',
+        'title' => 'ExpoDisplay Kiosk – 3D Ansicht & Maße',
+        'description' => 'Drehen Sie das Gerät und sehen Sie die Abmessungen auf einen Blick.',
+        'dimensions_title' => 'Maße (cm)',
+        'dimensions' => [
+            ['label' => 'Höhe', 'value' => '128,5 cm'],
+            ['label' => 'Breite', 'value' => '76 cm'],
+            ['label' => 'Tiefe', 'value' => '50 cm'],
+        ],
+        'summary' => 'Für Messen, Golfclubs, Retail, Showrooms, Hotels und Krankenhäuser.',
+        'aria' => '3D Ansicht des ExpoDisplay Kiosk',
+    ],
     'references' => [
         'eyebrow' => 'Referenzen',
         'title' => 'Der Unterschied, den Teams im Alltag direkt sehen',
