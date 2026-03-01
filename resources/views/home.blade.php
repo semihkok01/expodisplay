@@ -611,34 +611,43 @@
                     });
 
                     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                    renderer.setClearAlpha(0);
+                    renderer.physicallyCorrectLights = true;
+                    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                    renderer.toneMappingExposure = 1.1;
+                    renderer.outputColorSpace = THREE.SRGBColorSpace;
+                    renderer.setClearColor(0x0b1220, 1);
 
                     const scene = new THREE.Scene();
 
                     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-                    camera.position.set(3.6, 2.45, 5.8);
+                    camera.position.set(1.6, 1.4, 2.4);
 
                     const controls = new OrbitControls(camera, renderer.domElement);
                     controls.enableDamping = true;
                     controls.dampingFactor = 0.06;
                     controls.rotateSpeed = 0.8;
                     controls.enableZoom = true;
-                    controls.minDistance = 3.8;
-                    controls.maxDistance = 8.5;
+                    controls.minDistance = 1.2;
+                    controls.maxDistance = 4.5;
                     controls.enablePan = false;
-                    controls.target.set(0, 1.45, 0);
+                    controls.autoRotate = true;
+                    controls.autoRotateSpeed = 0.4;
+                    controls.target.set(0, 0.7, 0);
                     controls.update();
 
-                    const hemiLight = new THREE.HemisphereLight(0xeaf0ff, 0x0b1020, 1.1);
-                    scene.add(hemiLight);
+                    scene.add(new THREE.AmbientLight(0xffffff, 0.8));
 
                     const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
-                    keyLight.position.set(5, 7, 6);
+                    keyLight.position.set(3, 4, 2);
                     scene.add(keyLight);
 
-                    const fillLight = new THREE.DirectionalLight(0x93c5fd, 0.45);
-                    fillLight.position.set(-5, 3, 4);
+                    const fillLight = new THREE.DirectionalLight(0x88aaff, 0.6);
+                    fillLight.position.set(-2, 2, -2);
                     scene.add(fillLight);
+
+                    const rimLight = new THREE.DirectionalLight(0xffffff, 0.5);
+                    rimLight.position.set(0, 3, -3);
+                    scene.add(rimLight);
 
                     const roundedRectShape = (width, height, radius) => {
                         const x = -width / 2;
@@ -704,15 +713,15 @@
                     const kioskDepthTop = 50 * scale * 0.42;
 
                     const frameMaterial = new THREE.MeshStandardMaterial({
-                        color: 0x16181d,
-                        roughness: 0.74,
-                        metalness: 0.03,
+                        color: 0x1a1f2a,
+                        roughness: 0.5,
+                        metalness: 0.3,
                     });
 
                     const panelMaterial = new THREE.MeshStandardMaterial({
-                        color: 0xf8f8f5,
-                        roughness: 0.24,
-                        metalness: 0.01,
+                        color: 0xf4f6f8,
+                        roughness: 0.6,
+                        metalness: 0.05,
                     });
 
                     const bezelMaterial = new THREE.MeshStandardMaterial({
@@ -722,11 +731,11 @@
                     });
 
                     const screenMaterial = new THREE.MeshStandardMaterial({
-                        color: 0x0a0d12,
+                        color: 0x111111,
                         roughness: 0.12,
                         metalness: 0.02,
-                        emissive: 0x111827,
-                        emissiveIntensity: 0.06,
+                        emissive: 0x222222,
+                        emissiveIntensity: 0.4,
                     });
 
                     const group = new THREE.Group();
@@ -835,11 +844,26 @@
                     baseShadow.position.set(0, -kioskHeight / 2 + 0.2, frontPlaneZ + 0.045);
                     group.add(baseShadow);
 
+                    group.position.y = -0.6;
                     group.rotation.x = -0.08;
                     group.rotation.y = 0.46;
 
                     let isVisible = true;
                     let rafId = 0;
+                    let autoRotateResumeId = 0;
+
+                    const pauseAutoRotate = () => {
+                        controls.autoRotate = false;
+
+                        if (autoRotateResumeId) {
+                            window.clearTimeout(autoRotateResumeId);
+                        }
+
+                        autoRotateResumeId = window.setTimeout(() => {
+                            controls.autoRotate = true;
+                            autoRotateResumeId = 0;
+                        }, 3000);
+                    };
 
                     const resize = () => {
                         const width = Math.max(wrap.clientWidth, 1);
@@ -897,9 +921,14 @@
                         resizeObserver.observe(wrap);
                     }
 
+                    controls.addEventListener('start', pauseAutoRotate);
                     window.addEventListener('resize', resize, { passive: true });
                     window.addEventListener('pagehide', () => {
                         stop();
+                        if (autoRotateResumeId) {
+                            window.clearTimeout(autoRotateResumeId);
+                        }
+                        controls.removeEventListener('start', pauseAutoRotate);
                         controls.dispose();
                         visibilityObserver.disconnect();
                         resizeObserver?.disconnect();
