@@ -620,7 +620,7 @@
                     const scene = new THREE.Scene();
 
                     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-                    camera.position.set(1.6, 1.4, 2.4);
+                    camera.position.set(1.8, 1.5, 2.6);
 
                     const controls = new OrbitControls(camera, renderer.domElement);
                     controls.enableDamping = true;
@@ -631,8 +631,8 @@
                     controls.maxDistance = 4.5;
                     controls.enablePan = false;
                     controls.autoRotate = true;
-                    controls.autoRotateSpeed = 0.4;
-                    controls.target.set(0, 0.7, 0);
+                    controls.autoRotateSpeed = 0.35;
+                    controls.target.set(0, 0.35, 0);
                     controls.update();
 
                     scene.add(new THREE.AmbientLight(0xffffff, 0.8));
@@ -679,29 +679,30 @@
                         return new THREE.Mesh(geometry, material);
                     };
 
-                    const createWedgeBody = (width, height, depthBottom, depthTop, material) => {
-                        const bottom = -height / 2;
-                        const top = height / 2;
-                        const profile = new THREE.Shape();
-
-                        profile.moveTo(0.14, bottom);
-                        profile.lineTo(depthBottom - 0.12, bottom);
-                        profile.quadraticCurveTo(depthBottom, bottom, depthBottom, bottom + 0.14);
-                        profile.lineTo(depthTop + 0.12, top - 0.18);
-                        profile.quadraticCurveTo(depthTop + 0.02, top, depthTop - 0.12, top);
-                        profile.lineTo(0.08, top);
-                        profile.quadraticCurveTo(-0.02, top - 0.02, 0.02, top - 0.16);
-                        profile.lineTo(0.02, bottom + 0.18);
-                        profile.quadraticCurveTo(0.02, bottom + 0.02, 0.14, bottom);
-
-                        const geometry = new THREE.ExtrudeGeometry(profile, {
-                            depth: width,
+                    const createTaperedBody = (width, height, depth, radius, material, taper = 0.08, backLean = 0.04) => {
+                        const geometry = new THREE.ExtrudeGeometry(roundedRectShape(width, height, radius), {
+                            depth,
                             bevelEnabled: false,
-                            curveSegments: 20,
+                            curveSegments: 22,
                         });
 
                         geometry.center();
-                        geometry.rotateY(Math.PI / 2);
+
+                        const positions = geometry.attributes.position;
+
+                        for (let i = 0; i < positions.count; i += 1) {
+                            const x = positions.getX(i);
+                            const y = positions.getY(i);
+                            const z = positions.getZ(i);
+                            const yNorm = (y + height / 2) / height;
+                            const edgeFactor = Math.abs(x) / (width / 2);
+
+                            positions.setX(i, x * (1 - taper * yNorm));
+                            positions.setZ(i, z - yNorm * backLean - edgeFactor * 0.01);
+                        }
+
+                        positions.needsUpdate = true;
+                        geometry.computeVertexNormals();
 
                         return new THREE.Mesh(geometry, material);
                     };
@@ -713,13 +714,13 @@
                     const kioskDepthTop = 50 * scale * 0.42;
 
                     const frameMaterial = new THREE.MeshStandardMaterial({
-                        color: 0x1a1f2a,
-                        roughness: 0.5,
-                        metalness: 0.3,
+                        color: 0x222831,
+                        roughness: 0.55,
+                        metalness: 0.25,
                     });
 
                     const panelMaterial = new THREE.MeshStandardMaterial({
-                        color: 0xf4f6f8,
+                        color: 0xf5f7fa,
                         roughness: 0.6,
                         metalness: 0.05,
                     });
@@ -734,33 +735,32 @@
                         color: 0x111111,
                         roughness: 0.12,
                         metalness: 0.02,
-                        emissive: 0x222222,
-                        emissiveIntensity: 0.4,
+                        emissive: 0x1a1a1a,
+                        emissiveIntensity: 0.5,
                     });
 
                     const group = new THREE.Group();
                     scene.add(group);
 
-                    const outerFrame = createWedgeBody(kioskWidth, kioskHeight, kioskDepthBottom, kioskDepthTop, frameMaterial);
+                    const shellDepth = 0.5 * (kioskDepthBottom + kioskDepthTop);
+                    const outerFrame = createTaperedBody(kioskWidth, kioskHeight, shellDepth, 0.26, frameMaterial, 0.07, 0.045);
                     outerFrame.castShadow = true;
                     outerFrame.receiveShadow = true;
                     group.add(outerFrame);
 
-                    const panelInset = 0.11;
-                    const panelDepthBottom = kioskDepthBottom - panelInset;
-                    const panelDepthTop = kioskDepthTop - panelInset * 0.6;
-                    const frontPlaneZ = -(panelDepthBottom * 0.5) + 0.055;
+                    const panelDepth = shellDepth - 0.065;
+                    const frontPlaneZ = -(panelDepth * 0.5) + 0.034;
 
-                    const whitePanel = createWedgeBody(kioskWidth - 0.16, kioskHeight - 0.16, panelDepthBottom, panelDepthTop, panelMaterial);
-                    whitePanel.position.set(0, 0, -0.005);
+                    const whitePanel = createTaperedBody(kioskWidth - 0.18, kioskHeight - 0.18, panelDepth, 0.22, panelMaterial, 0.06, 0.038);
+                    whitePanel.position.set(0, 0, 0.006);
                     group.add(whitePanel);
 
-                    const screenFrame = createRoundedPanel(kioskWidth - 0.84, kioskHeight - 1.72, 0.045, 0.07, bezelMaterial);
-                    screenFrame.position.set(0, -0.03, frontPlaneZ + 0.048);
+                    const screenFrame = createRoundedPanel(kioskWidth - 0.9, kioskHeight - 1.76, 0.04, 0.06, bezelMaterial);
+                    screenFrame.position.set(0, -0.02, frontPlaneZ + 0.028);
                     group.add(screenFrame);
 
-                    const screen = createRoundedPanel(kioskWidth - 0.98, kioskHeight - 1.9, 0.026, 0.05, screenMaterial);
-                    screen.position.set(0, -0.03, frontPlaneZ + 0.078);
+                    const screen = createRoundedPanel(kioskWidth - 1.05, kioskHeight - 1.92, 0.024, 0.04, screenMaterial);
+                    screen.position.set(0, -0.02, frontPlaneZ + 0.054);
                     group.add(screen);
 
                     const gloss = new THREE.Mesh(
@@ -772,7 +772,7 @@
                             side: THREE.DoubleSide,
                         })
                     );
-                    gloss.position.set(-0.09, 0.05, frontPlaneZ + 0.095);
+                    gloss.position.set(-0.08, 0.04, frontPlaneZ + 0.067);
                     gloss.rotation.y = -0.07;
                     group.add(gloss);
 
@@ -784,7 +784,7 @@
                             opacity: 0.98,
                         })
                     );
-                    contentTop.position.set(0, 0.74, frontPlaneZ + 0.09);
+                    contentTop.position.set(0, 0.72, frontPlaneZ + 0.062);
                     group.add(contentTop);
 
                     const contentBottom = new THREE.Mesh(
@@ -795,7 +795,7 @@
                             opacity: 0.96,
                         })
                     );
-                    contentBottom.position.set(0, -0.9, frontPlaneZ + 0.091);
+                    contentBottom.position.set(0, -0.88, frontPlaneZ + 0.063);
                     group.add(contentBottom);
 
                     const contentSeparator = new THREE.Mesh(
@@ -804,11 +804,15 @@
                             color: 0xe5e7eb,
                         })
                     );
-                    contentSeparator.position.set(0, -0.14, frontPlaneZ + 0.092);
+                    contentSeparator.position.set(0, -0.14, frontPlaneZ + 0.064);
                     group.add(contentSeparator);
 
-                    const sensor = createRoundedPanel(0.66, 0.12, 0.04, 0.04, bezelMaterial);
-                    sensor.position.set(0, kioskHeight / 2 - 0.57, frontPlaneZ + 0.04);
+                    const sensor = createRoundedPanel(0.66, 0.12, 0.035, 0.035, new THREE.MeshStandardMaterial({
+                        color: 0x000000,
+                        roughness: 0.45,
+                        metalness: 0.18,
+                    }));
+                    sensor.position.set(0, kioskHeight / 2 - 0.57, frontPlaneZ + 0.022);
                     group.add(sensor);
 
                     const lens = new THREE.Mesh(
@@ -819,8 +823,19 @@
                             emissiveIntensity: 0.05,
                         })
                     );
-                    lens.position.set(-0.16, kioskHeight / 2 - 0.57, frontPlaneZ + 0.065);
+                    lens.position.set(-0.16, kioskHeight / 2 - 0.57, frontPlaneZ + 0.048);
                     group.add(lens);
+
+                    const logoStrip = new THREE.Mesh(
+                        new THREE.PlaneGeometry(kioskWidth - 1.28, 0.14),
+                        new THREE.MeshBasicMaterial({
+                            color: 0xcbd5e1,
+                            transparent: true,
+                            opacity: 0.55,
+                        })
+                    );
+                    logoStrip.position.set(0, -kioskHeight / 2 + 0.38, frontPlaneZ + 0.055);
+                    group.add(logoStrip);
 
                     const sideSlot = new THREE.Mesh(
                         new THREE.BoxGeometry(0.06, 0.38, 0.03),
@@ -844,8 +859,8 @@
                     baseShadow.position.set(0, -kioskHeight / 2 + 0.2, frontPlaneZ + 0.045);
                     group.add(baseShadow);
 
-                    group.position.y = -0.6;
-                    group.rotation.x = -0.08;
+                    group.position.y = -0.62;
+                    group.rotation.x = -0.06;
                     group.rotation.y = 0.46;
 
                     let isVisible = true;
