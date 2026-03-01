@@ -572,8 +572,19 @@
             </section>
         </main>
 
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+                }
+            }
+        </script>
         <script type="module">
-            const initKiosk3D = async () => {
+            import * as THREE from 'three';
+            import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+            const initKiosk3D = () => {
                 const wrap = document.getElementById('kiosk3dWrap');
                 const canvas = document.getElementById('kiosk3dCanvas');
                 const fallback = document.getElementById('kiosk3dFallback');
@@ -592,9 +603,6 @@
                 };
 
                 try {
-                    const THREE = await import('https://unpkg.com/three@0.160.0/build/three.module.js');
-                    const { OrbitControls } = await import('https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js');
-
                     const renderer = new THREE.WebGLRenderer({
                         canvas,
                         antialias: true,

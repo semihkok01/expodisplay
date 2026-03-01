@@ -1,16 +1,16 @@
 <section id="device-3d" class="section-space pt-0">
-    <div class="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center lg:gap-8">
-            <div class="lg:col-span-7">
+    <div class="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-stretch lg:gap-6">
+            <div>
                 <div class="device-viewer-shell panel overflow-hidden p-3 sm:p-4">
                     <div
                         id="kiosk3dWrap"
-                        class="device-viewer-stage relative min-h-[280px] w-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(5,10,25,0.24)] sm:min-h-[320px] md:min-h-[360px] lg:min-h-[400px]"
+                        class="device-viewer-stage relative min-h-[260px] w-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(5,10,25,0.24)] sm:min-h-[300px] md:min-h-[330px] lg:min-h-[340px]"
                     >
                         <span class="pointer-events-none absolute left-4 top-4 z-[2] rounded-full border border-white/10 bg-[rgba(11,16,32,0.7)] px-3 py-1 text-[11px] font-medium tracking-[0.08em] text-white/72">
                             {{ __('home.device.hint') }}
                         </span>
-                        <canvas id="kiosk3dCanvas" class="block h-full min-h-[280px] w-full sm:min-h-[320px] md:min-h-[360px] lg:min-h-[400px]" aria-label="{{ __('home.device.aria') }}"></canvas>
+                        <canvas id="kiosk3dCanvas" class="block h-full min-h-[260px] w-full sm:min-h-[300px] md:min-h-[330px] lg:min-h-[340px]" aria-label="{{ __('home.device.aria') }}"></canvas>
                         <div id="kiosk3dFallback" class="absolute inset-0 hidden items-center justify-center px-6 text-center text-sm text-white/72">
                             {{ __('home.device.fallback') }}
                         </div>
@@ -18,8 +18,8 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-5">
-                <div class="panel p-6 md:p-8">
+            <div>
+                <div class="panel h-full p-6 md:p-8">
                     <p class="mb-3 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary">
                         {{ __('home.device.eyebrow') }}
                     </p>
