@@ -102,59 +102,121 @@
     .language-switcher-trigger {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        gap: 0.45rem;
-        min-width: 2.5rem;
-        height: 2.5rem;
-        padding: 0 0.7rem;
-        border-radius: 0.9rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.04);
+        justify-content: space-between;
+        gap: 0.75rem;
+        min-width: 10.5rem;
+        min-height: 2.75rem;
+        padding: 0.45rem 0.8rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
         cursor: pointer;
-        transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+        transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
     }
 
     .language-switcher-trigger:hover {
         background: rgba(255, 255, 255, 0.08);
         border-color: rgba(255, 255, 255, 0.16);
         transform: translateY(-1px);
+        box-shadow: 0 10px 24px rgba(5, 10, 25, 0.18);
+    }
+
+    .language-trigger-meta,
+    .language-link-main {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        min-width: 0;
+    }
+
+    .language-trigger-copy {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.1;
+    }
+
+    .language-trigger-label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(234, 240, 255, 0.52);
+    }
+
+    .language-trigger-active {
+        margin-top: 0.12rem;
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.92);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .language-trigger-caret {
+        font-size: 0.8rem;
+        line-height: 1;
+        color: rgba(234, 240, 255, 0.62);
     }
 
     .language-switcher-menu {
         position: absolute;
         right: 0;
         top: calc(100% + 0.75rem);
-        min-width: 15rem;
+        min-width: 16.5rem;
         display: grid;
         gap: 0.4rem;
-        padding: 0.7rem;
-        border-radius: 1rem;
+        padding: 0.75rem;
+        border-radius: 1.1rem;
         border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(11, 16, 32, 0.98);
+        background: linear-gradient(180deg, rgba(11, 16, 32, 0.98), rgba(15, 23, 48, 0.98));
         box-shadow: 0 18px 42px rgba(5, 10, 25, 0.28);
     }
 
     .language-switcher-link {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        justify-content: space-between;
+        gap: 1rem;
         min-height: 44px;
         padding: 0.65rem 0.8rem;
         border-radius: 0.85rem;
         color: var(--text);
         font-size: 0.92rem;
         font-weight: 500;
-        transition: background 0.22s ease, color 0.22s ease;
+        border: 1px solid transparent;
+        transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
     }
 
     .language-switcher-link:hover {
-        background: rgba(255, 255, 255, 0.06);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.08);
         color: white;
     }
 
     .language-switcher-link.is-active {
-        background: rgba(59, 130, 246, 0.12);
+        background: rgba(59, 130, 246, 0.1);
+        border-color: rgba(59, 130, 246, 0.16);
         color: white;
+    }
+
+    .language-link-code {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2rem;
+        height: 1.55rem;
+        padding: 0 0.45rem;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 0.66rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(234, 240, 255, 0.64);
+        flex-shrink: 0;
     }
 
     .flag-badge {
@@ -206,6 +268,12 @@
         display: flex;
         align-items: center;
         padding-inline: 1rem;
+    }
+
+    .mobile-nav .language-switcher-link {
+        min-height: 3rem;
+        border-radius: 1rem;
+        padding-inline: 0.9rem;
     }
 
     .nav-link.is-active {
@@ -1106,6 +1174,19 @@ body.menu-open {
 
     .strategy-kiosk-screen {
         min-height: 14.5rem;
+    }
+
+    .language-switcher-trigger {
+        min-width: auto;
+        padding-inline: 0.7rem;
+    }
+
+    .language-trigger-label {
+        display: none;
+    }
+
+    .language-trigger-active {
+        font-size: 0.8rem;
     }
 }
 

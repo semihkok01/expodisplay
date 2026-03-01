@@ -65,6 +65,15 @@ const initSmoothScroll = () => {
                 return;
             }
 
+            if (href === '#top') {
+                event.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                });
+                return;
+            }
+
             const target = document.querySelector(href);
 
             if (!target) {
@@ -72,10 +81,7 @@ const initSmoothScroll = () => {
             }
 
             event.preventDefault();
-
-            const top = href === '#top'
-                ? 0
-                : window.scrollY + target.getBoundingClientRect().top - getHeaderOffset();
+            const top = window.scrollY + target.getBoundingClientRect().top - getHeaderOffset();
 
             window.scrollTo({
                 top,

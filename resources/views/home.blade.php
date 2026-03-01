@@ -105,15 +105,24 @@
                     <x-button href="#contact" data-scroll-to class="ml-2">{{ __('common.cta.demo') }}</x-button>
                     <details class="language-switcher relative ml-2">
                         <summary class="language-switcher-trigger" aria-label="{{ __('common.language.active', ['language' => $activeLanguage['label']]) }}">
-                            <span class="flag-badge" aria-hidden="true">{{ $activeLanguage['flag'] }}</span>
-                            <span class="hidden text-[11px] font-semibold uppercase tracking-[0.18em] text-white/82 xl:inline">{{ $activeLanguage['code'] }}</span>
+                            <span class="language-trigger-meta">
+                                <span class="flag-badge" aria-hidden="true">{{ $activeLanguage['flag'] }}</span>
+                                <span class="language-trigger-copy">
+                                    <span class="language-trigger-label">{{ __('common.language.label') }}</span>
+                                    <span class="language-trigger-active">{{ $activeLanguage['label'] }}</span>
+                                </span>
+                            </span>
+                            <span class="language-trigger-caret" aria-hidden="true">▾</span>
                         </summary>
                         <div class="language-switcher-menu">
                             @foreach ($alternateLocaleCodes as $localeCode)
                                 @php $option = $languageOptions[$localeCode]; @endphp
                                 <a href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }}" class="language-switcher-link {{ $localeCode === $activeLocale ? 'is-active' : '' }}" hreflang="{{ $localeCode }}" @if ($localeCode === $activeLocale) aria-current="true" @endif>
-                                    <span class="flag-badge" aria-hidden="true">{{ $option['flag'] }}</span>
-                                    <span>{{ $option['label'] }}</span>
+                                    <span class="language-link-main">
+                                        <span class="flag-badge" aria-hidden="true">{{ $option['flag'] }}</span>
+                                        <span>{{ $option['label'] }}</span>
+                                    </span>
+                                    <span class="language-link-code">{{ $option['code'] }}</span>
                                 </a>
                             @endforeach
                         </div>
@@ -138,14 +147,22 @@
                             {{ $label }}
                         </a>
                     @endforeach
-                    <div class="mt-3 grid gap-2 rounded-2xl border border-white/8 bg-white/[0.03] p-3">
+                    <div class="mt-3 rounded-2xl border border-white/8 bg-white/[0.03] p-3">
+                        <p class="mb-3 px-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/55">
+                            {{ __('common.language.label') }}
+                        </p>
+                        <div class="grid gap-2 sm:grid-cols-2">
                         @foreach ($alternateLocaleCodes as $localeCode)
                             @php $option = $languageOptions[$localeCode]; @endphp
                             <a href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }}" class="language-switcher-link {{ $localeCode === $activeLocale ? 'is-active' : '' }}" hreflang="{{ $localeCode }}" @if ($localeCode === $activeLocale) aria-current="true" @endif>
-                                <span class="flag-badge" aria-hidden="true">{{ $option['flag'] }}</span>
-                                <span>{{ $option['label'] }}</span>
+                                <span class="language-link-main">
+                                    <span class="flag-badge" aria-hidden="true">{{ $option['flag'] }}</span>
+                                    <span>{{ $option['label'] }}</span>
+                                </span>
+                                <span class="language-link-code">{{ $option['code'] }}</span>
                             </a>
                         @endforeach
+                        </div>
                     </div>
                 </div>
             </nav>
