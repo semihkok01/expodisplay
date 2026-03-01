@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-bg text-text antialiased">
+<body class="min-h-screen bg-bg text-text antialiased">
     <div class="scroll-progress" aria-hidden="true">
         <span data-scroll-progress></span>
     </div>
@@ -31,7 +31,7 @@
                         alt="ExpoDisplay"
                         width="160"
                         height="160"
-                        class="block h-auto max-h-[28px] w-auto object-contain align-middle sm:max-h-[34px]"
+                        class="block h-auto max-h-[48px] w-auto object-contain align-middle sm:max-h-[56px]"
                         decoding="async"
                         fetchpriority="high"
                     >
@@ -72,7 +72,7 @@
                 </nav>
             </div>
 
-            <nav id="mobile-menu" class="mobile-nav hidden border-t border-white/5 lg:hidden" aria-label="Mobile Navigation">
+            <nav id="mobile-menu" class="mobile-nav border-t border-white/5 lg:hidden" aria-label="Mobile Navigation" aria-hidden="true">
                 <div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-4 sm:px-6">
                     @foreach ([
                         'features' => 'Vorteile',
@@ -104,17 +104,17 @@
                     @endfor
                 </div>
 
-                <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-28">
+                <div class="mx-auto grid max-w-7xl gap-6 px-5 pb-14 pt-20 sm:gap-10 sm:px-6 sm:py-20 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12 lg:px-8 lg:py-28">
                     <div class="relative z-10 flex flex-col justify-center">
                         <p class="hero-pill" data-hero-seq>Digital Signage mit Wirkung</p>
-                        <h1 class="mt-5 max-w-3xl font-display text-[clamp(2.2rem,4vw,3.6rem)] font-extrabold leading-[1.05] tracking-tight" data-hero-seq>
+                        <h1 class="mt-5 max-w-3xl font-display text-[clamp(1.8rem,5vw,2.2rem)] font-extrabold leading-[1.08] tracking-tight md:text-[clamp(2.2rem,4vw,3.6rem)] md:leading-[1.05]" data-hero-seq>
                             Digitale Displays, die Aufmerksamkeit in Umsatz verwandeln.
                         </h1>
-                        <p class="mt-6 max-w-2xl text-base leading-8 text-muted" data-hero-seq>
+                        <p class="mt-5 max-w-2xl text-base leading-[1.7] text-muted md:mt-6 md:leading-8" data-hero-seq>
                             Installation, Content-Management und Support – alles aus einer Hand.
                         </p>
 
-                        <div class="mt-8 flex flex-col gap-3 sm:flex-row" data-hero-seq>
+                        <div class="hero-cta-group mt-7 flex flex-col gap-3 md:mt-8 md:flex-row" data-hero-seq>
                             <x-button href="#contact" data-scroll-to>Kostenlose Demo anfragen</x-button>
                             <x-button href="#contact" variant="outline" data-scroll-to>Jetzt Beratung sichern</x-button>
                         </div>
@@ -134,7 +134,7 @@
                         </div>
                     </div>
 
-                    <div class="relative z-10 flex items-center justify-center" data-hero-seq>
+                    <div class="hero-mockup-wrap relative z-10 flex items-center justify-center" data-hero-seq>
                         <div class="hero-depth js-parallax" data-parallax-speed="22">
                             <div class="tilt-surface js-tilt">
                                 <div class="kiosk-frame">
@@ -177,7 +177,7 @@
                         description="Wir gestalten lebendige Screen-Konzepte nicht nur für Optik, sondern für messbare Wirkung am Standort."
                     />
 
-                    <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4" data-animate-group>
+                    <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4 sm:mt-12" data-animate-group>
                         @foreach ($features as $feature)
                             <article class="feature-card panel p-6 js-tilt" data-animate-item>
                                 <div class="feature-icon">
@@ -219,7 +219,7 @@
                         description="Für jeden Use Case die passende Perspektive, die richtige Botschaft und ein konsistenter Markenauftritt."
                     />
 
-                    <div class="mt-12 grid gap-6 lg:grid-cols-3" data-animate-group>
+                    <div class="mt-8 grid gap-5 lg:grid-cols-3 sm:mt-12 sm:gap-6" data-animate-group>
                         @foreach ($showcases as $item)
                             <article class="showcase-card panel overflow-hidden p-6" data-animate-item>
                                 <div class="screen-stage js-parallax" data-parallax-speed="16">
@@ -260,7 +260,7 @@
                         description="Reale MP4-Demos im 9:16-Format – ideal für Messen, Golfclubs und Retail."
                     />
 
-                    <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4" data-animate-group>
+                    <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4 sm:mt-12 sm:gap-6" data-animate-group>
                         @foreach ($videoShowcaseItems as $item)
                             <article class="video-kiosk-card panel p-4 js-tilt" data-animate-item>
                                 <div class="video-kiosk-frame">
@@ -290,8 +290,8 @@
 
                                 <div class="mt-5 px-2 pb-2">
                                     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{{ $item['label'] }}</p>
-                                    <h3 class="mt-2 text-lg font-semibold text-text">{{ $item['title'] }}</h3>
-                                    <p class="mt-2 text-sm leading-7 text-muted">Echter vertikaler MP4-Spot im realitätsnahen Device-Layout für Vor-Ort-Demos.</p>
+                                    <h3 class="mobile-line-clamp-2 mt-2 text-lg font-semibold text-text">{{ $item['title'] }}</h3>
+                                    <p class="mobile-line-clamp-2 mt-2 text-sm leading-7 text-muted">Echter vertikaler MP4-Spot im realitätsnahen Device-Layout für Vor-Ort-Demos.</p>
                                 </div>
                             </article>
                         @endforeach
@@ -308,7 +308,7 @@
                         description="Das Feedback zeigt nicht nur bessere Optik, sondern auch schnellere Prozesse und mehr Aufmerksamkeit vor Ort."
                         />
 
-                        <div class="mt-10 space-y-5" data-animate-group>
+                        <div class="mt-8 space-y-4 sm:mt-10 sm:space-y-5" data-animate-group>
                             @foreach ($testimonials as $testimonial)
                                 <article class="panel p-6" data-animate-item>
                                     <p class="text-sm leading-7 text-white/90">"{{ $testimonial['quote'] }}"</p>
@@ -355,7 +355,7 @@
                         align="center"
                     />
 
-                    <div class="mt-10 space-y-4" data-animate-group>
+                    <div class="mt-8 space-y-4 sm:mt-10" data-animate-group>
                         @foreach ($faqs as $index => $item)
                             <x-faq-item :item="$item" :index="$index" />
                         @endforeach

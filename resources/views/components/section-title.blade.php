@@ -16,12 +16,12 @@
         </p>
     @endif
 
-    <h2 class="font-display text-[clamp(1.6rem,2.6vw,2.2rem)] font-extrabold tracking-tight text-text">
+    <h2 class="font-display text-[1.4rem] font-extrabold tracking-tight text-text md:text-[clamp(1.6rem,2.6vw,2.2rem)]">
         {{ $title }}
     </h2>
 
     @if ($description)
-        <p class="mt-4 text-base leading-7 text-muted">
+        <p class="mt-3 text-base leading-7 text-muted md:mt-4">
             {{ $description }}
         </p>
     @endif

@@ -4,6 +4,7 @@ import anime from 'animejs/lib/anime.es.js';
 document.documentElement.classList.add('js');
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
 const header = document.querySelector('header');
 
 const getHeaderOffset = () => (header ? header.offsetHeight + 10 : 90);
@@ -25,16 +26,30 @@ const initMobileNav = () => {
     }
 
     const setState = (open) => {
-        menu.classList.toggle('hidden', !open);
+        menu.classList.toggle('is-open', open);
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+        document.body.classList.toggle('menu-open', open);
     };
 
     toggle.addEventListener('click', () => {
-        setState(menu.classList.contains('hidden'));
+        setState(!menu.classList.contains('is-open'));
     });
 
     menu.querySelectorAll('[data-scroll-to]').forEach((link) => {
         link.addEventListener('click', () => setState(false));
+    });
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            setState(false);
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) {
+            setState(false);
+        }
     });
 };
 
@@ -146,7 +161,7 @@ const initHeroGlow = () => {
             targets: glow,
             opacity: [0.42, 0.68],
             scale: [0.98, 1.04],
-            duration: 2800,
+            duration: isMobileViewport ? 2200 : 2800,
             direction: 'alternate',
             easing: 'easeInOutSine',
             loop: true,
@@ -194,12 +209,12 @@ const initHeroAnimation = () => {
 
     anime.timeline({
         easing: 'easeOutExpo',
-        duration: 950,
+        duration: isMobileViewport ? 600 : 950,
     }).add({
         targets,
         opacity: [0, 1],
-        translateY: [26, 0],
-        delay: anime.stagger(110),
+        translateY: [isMobileViewport ? 18 : 26, 0],
+        delay: anime.stagger(isMobileViewport ? 80 : 110),
         complete: () => clearAnimatedState(targets),
     });
 };
@@ -229,8 +244,8 @@ const initRevealGroups = () => {
                     translateY: [50, 0],
                     rotateX: [15, 0],
                     filter: ['blur(4px)', 'blur(0px)'],
-                    delay: anime.stagger(120),
-                    duration: 820,
+                    delay: anime.stagger(isMobileViewport ? 80 : 120),
+                    duration: isMobileViewport ? 600 : 820,
                     easing: 'easeOutExpo',
                     complete: () => clearAnimatedState(items),
                 });
@@ -246,7 +261,7 @@ const initRevealGroups = () => {
 };
 
 const initParticles = () => {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || isMobileViewport) {
         return;
     }
 
@@ -265,7 +280,7 @@ const initParticles = () => {
 const initTilt = () => {
     const surfaces = Array.from(document.querySelectorAll('.js-tilt'));
 
-    if (!surfaces.length || prefersReducedMotion) {
+    if (!surfaces.length || prefersReducedMotion || isMobileViewport) {
         return;
     }
 
@@ -299,7 +314,7 @@ const initTilt = () => {
 const initParallax = () => {
     const elements = Array.from(document.querySelectorAll('.js-parallax'));
 
-    if (!elements.length || prefersReducedMotion) {
+    if (!elements.length || prefersReducedMotion || isMobileViewport) {
         return;
     }
 
