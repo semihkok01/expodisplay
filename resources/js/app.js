@@ -414,6 +414,58 @@ const initKioskUiAnimation = () => {
     }
 };
 
+const initStrategyDeviceAnimation = () => {
+    if (prefersReducedMotion) {
+        return;
+    }
+
+    const strategyCards = Array.from(document.querySelectorAll('.showcase-card'));
+
+    strategyCards.forEach((card, index) => {
+        const lines = card.querySelectorAll('[data-strategy-line]');
+        const progress = card.querySelector('[data-strategy-progress]');
+        const copy = card.querySelector('[data-strategy-copy]');
+
+        if (lines.length) {
+            anime({
+                targets: lines,
+                scaleX: [0.72, 1],
+                opacity: [0.45, 0.95],
+                delay: anime.stagger(120, { start: index * 120 }),
+                duration: 1500,
+                direction: 'alternate',
+                easing: 'easeInOutSine',
+                loop: true,
+            });
+        }
+
+        if (progress) {
+            anime({
+                targets: progress,
+                scaleX: [0.4, 1],
+                duration: 1700,
+                delay: index * 140,
+                direction: 'alternate',
+                easing: 'easeInOutQuad',
+                loop: true,
+            });
+        }
+
+        if (copy) {
+            anime({
+                targets: copy,
+                opacity: [0.82, 1],
+                translateY: [4, 0],
+                duration: 1300,
+                delay: index * 100,
+                direction: 'alternate',
+                easing: 'easeInOutSine',
+                loop: true,
+            });
+        }
+    });
+};
+
 const initStats = () => {
     const stats = Array.from(document.querySelectorAll('[data-stat-value]'));
 
@@ -554,6 +606,7 @@ initParticles();
 initTilt();
 initParallax();
 initKioskUiAnimation();
+initStrategyDeviceAnimation();
 initStats();
 initAccordion();
 initToast();

@@ -226,13 +226,28 @@
                             <article class="showcase-card panel overflow-hidden p-5 md:p-6" data-animate-item>
                                 <div class="screen-stage js-parallax" data-parallax-speed="16">
                                     <div class="tilt-surface js-tilt" data-tilt-intensity="3">
-                                        <div class="showcase-screen showcase-{{ $item['accent'] }}">
-                                            <div class="showcase-panel"></div>
-                                            <div class="showcase-panel showcase-panel-short"></div>
-                                            <div class="showcase-bars">
-                                                <span></span>
-                                                <span></span>
-                                                <span></span>
+                                        <div class="strategy-kiosk-frame">
+                                            <div class="strategy-kiosk-top"></div>
+                                            <div class="strategy-kiosk-shell">
+                                                <div class="strategy-kiosk-sensor">
+                                                    <span class="strategy-kiosk-lens"></span>
+                                                </div>
+                                                <div class="strategy-kiosk-screen strategy-kiosk-{{ $item['accent'] }}">
+                                                    <div class="strategy-screen-glow"></div>
+                                                    <div class="strategy-screen-stripe" data-strategy-line></div>
+                                                    <div class="strategy-screen-stripe strategy-screen-stripe-short" data-strategy-line></div>
+                                                    <div class="strategy-screen-banner">
+                                                        <span class="strategy-screen-chip">{{ $item['eyebrow'] }}</span>
+                                                        <strong data-strategy-copy>{{ $item['title'] }}</strong>
+                                                        <span class="strategy-screen-meter">
+                                                            <i data-strategy-progress></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="strategy-screen-bottom">
+                                                        <div class="strategy-mini-panel"></div>
+                                                        <div class="strategy-mini-panel strategy-mini-panel-alt"></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
