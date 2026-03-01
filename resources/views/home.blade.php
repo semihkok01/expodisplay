@@ -526,10 +526,6 @@
                                 <p class="mt-2">{{ __('common.contact.info.address_value') }}</p>
                             </div>
                             <div>
-                                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{{ __('common.contact.info.phone') }}</p>
-                                <p class="mt-2"><a href="tel:{{ preg_replace('/\s+/', '', __('common.contact.info.phone_value')) }}" class="transition hover:text-text">{{ __('common.contact.info.phone_value') }}</a></p>
-                            </div>
-                            <div>
                                 <p class="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{{ __('common.contact.info.email') }}</p>
                                 <p class="mt-2"><a href="mailto:{{ __('common.contact.info.email_value') }}" class="transition hover:text-text">{{ __('common.contact.info.email_value') }}</a></p>
                             </div>
