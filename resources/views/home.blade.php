@@ -102,7 +102,7 @@
                             {{ $label }}
                         </a>
                     @endforeach
-                    <x-button href="#contact" data-scroll-to class="ml-2">{{ __('common.cta.demo') }}</x-button>
+                    <x-button href="#contact" data-scroll-to class="nav-cta ml-2">{{ __('common.cta.demo') }}</x-button>
                     <details class="language-switcher relative ml-2">
                         <summary class="language-switcher-trigger" aria-label="{{ __('common.language.active', ['language' => $activeLanguage['label']]) }}">
                             <span class="language-trigger-meta">
