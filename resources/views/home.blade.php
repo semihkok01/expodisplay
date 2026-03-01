@@ -71,20 +71,48 @@
                     </span>
                 </a>
 
-                <button
-                    type="button"
-                    class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-text lg:hidden"
-                    aria-expanded="false"
-                    aria-controls="mobile-menu"
-                    data-menu-toggle
-                >
-                    <span class="sr-only">{{ __('common.nav.menu') }}</span>
-                    <span class="space-y-1.5">
-                        <span class="block h-0.5 w-5 bg-current"></span>
-                        <span class="block h-0.5 w-5 bg-current"></span>
-                        <span class="block h-0.5 w-5 bg-current"></span>
-                    </span>
-                </button>
+                <div class="flex items-center gap-2 lg:hidden">
+                    <details class="language-switcher relative">
+                        <summary class="language-switcher-trigger" aria-label="{{ __('common.language.active', ['language' => $activeLanguage['label']]) }}">
+                            <span class="flag-badge" aria-hidden="true">{{ $activeLanguage['flag'] }}</span>
+                            <span class="language-trigger-code">{{ strtoupper($activeLanguage['code']) }}</span>
+                            <svg class="language-trigger-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </summary>
+                        <div class="language-switcher-menu">
+                            @foreach ($alternateLocaleCodes as $localeCode)
+                                @php $option = $languageOptions[$localeCode]; @endphp
+                                <a href="{{ route('locale.switch', $localeCode) }}" class="language-switcher-link {{ $localeCode === $activeLocale ? 'is-active' : '' }}" hreflang="{{ $localeCode }}" @if ($localeCode === $activeLocale) aria-current="true" @endif>
+                                    <span class="language-link-main">
+                                        <span class="flag-badge" aria-hidden="true">{{ $option['flag'] }}</span>
+                                        <span>{{ $option['label'] }}</span>
+                                    </span>
+                                    @if ($localeCode === $activeLocale)
+                                        <span class="language-link-check" aria-hidden="true">✓</span>
+                                    @else
+                                        <span class="language-link-code">{{ strtoupper($option['code']) }}</span>
+                                    @endif
+                                </a>
+                            @endforeach
+                        </div>
+                    </details>
+
+                    <button
+                        type="button"
+                        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-text"
+                        aria-expanded="false"
+                        aria-controls="mobile-menu"
+                        data-menu-toggle
+                    >
+                        <span class="sr-only">{{ __('common.nav.menu') }}</span>
+                        <span class="space-y-1.5">
+                            <span class="block h-0.5 w-5 bg-current"></span>
+                            <span class="block h-0.5 w-5 bg-current"></span>
+                            <span class="block h-0.5 w-5 bg-current"></span>
+                        </span>
+                    </button>
+                </div>
 
                 <nav class="hidden items-center gap-2 lg:flex" aria-label="{{ __('common.nav.label') }}">
                     <a href="#top" data-scroll-to class="nav-link">
@@ -148,27 +176,6 @@
                             {{ $label }}
                         </a>
                     @endforeach
-                    <div class="mt-3 rounded-2xl border border-white/8 bg-white/[0.03] p-3">
-                        <p class="mb-3 px-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                            {{ __('common.language.label') }}
-                        </p>
-                        <div class="grid gap-2 sm:grid-cols-2">
-                        @foreach ($alternateLocaleCodes as $localeCode)
-                            @php $option = $languageOptions[$localeCode]; @endphp
-                            <a href="{{ route('locale.switch', $localeCode) }}" class="language-switcher-link {{ $localeCode === $activeLocale ? 'is-active' : '' }}" hreflang="{{ $localeCode }}" @if ($localeCode === $activeLocale) aria-current="true" @endif>
-                                <span class="language-link-main">
-                                    <span class="flag-badge" aria-hidden="true">{{ $option['flag'] }}</span>
-                                    <span>{{ $option['label'] }}</span>
-                                </span>
-                                @if ($localeCode === $activeLocale)
-                                    <span class="language-link-check" aria-hidden="true">✓</span>
-                                @else
-                                    <span class="language-link-code">{{ strtoupper($option['code']) }}</span>
-                                @endif
-                            </a>
-                        @endforeach
-                        </div>
-                    </div>
                 </div>
             </nav>
         </header>

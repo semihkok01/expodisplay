@@ -56,6 +56,44 @@ const initMobileNav = () => {
     setState(false);
 };
 
+const initLanguageSwitchers = () => {
+    const switchers = Array.from(document.querySelectorAll('.language-switcher'));
+
+    if (!switchers.length) {
+        return;
+    }
+
+    document.addEventListener('click', (event) => {
+        switchers.forEach((switcher) => {
+            if (!switcher.contains(event.target)) {
+                switcher.removeAttribute('open');
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') {
+            return;
+        }
+
+        switchers.forEach((switcher) => switcher.removeAttribute('open'));
+    });
+
+    switchers.forEach((switcher) => {
+        switcher.addEventListener('toggle', () => {
+            if (!switcher.open) {
+                return;
+            }
+
+            switchers.forEach((other) => {
+                if (other !== switcher) {
+                    other.removeAttribute('open');
+                }
+            });
+        });
+    });
+};
+
 const initSmoothScroll = () => {
     document.querySelectorAll('[data-scroll-to]').forEach((trigger) => {
         trigger.addEventListener('click', (event) => {
@@ -601,6 +639,7 @@ const initToast = () => {
 };
 
 initMobileNav();
+initLanguageSwitchers();
 initInitialScrollPosition();
 initSmoothScroll();
 initActiveSections();
