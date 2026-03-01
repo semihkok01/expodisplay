@@ -31,7 +31,7 @@
                         alt="ExpoDisplay"
                         width="160"
                         height="160"
-                        class="block h-auto max-h-[48px] w-auto object-contain align-middle sm:max-h-[56px]"
+                        class="block h-auto max-h-[40px] w-auto object-contain align-middle md:max-h-[48px]"
                         decoding="async"
                         fetchpriority="high"
                     >
