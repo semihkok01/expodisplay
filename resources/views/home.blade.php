@@ -670,10 +670,38 @@
                         return new THREE.Mesh(geometry, material);
                     };
 
-                    const scale = 0.035;
+                    const createWedgeBody = (width, height, depthBottom, depthTop, material) => {
+                        const bottom = -height / 2;
+                        const top = height / 2;
+                        const profile = new THREE.Shape();
+
+                        profile.moveTo(0.14, bottom);
+                        profile.lineTo(depthBottom - 0.12, bottom);
+                        profile.quadraticCurveTo(depthBottom, bottom, depthBottom, bottom + 0.14);
+                        profile.lineTo(depthTop + 0.12, top - 0.18);
+                        profile.quadraticCurveTo(depthTop + 0.02, top, depthTop - 0.12, top);
+                        profile.lineTo(0.08, top);
+                        profile.quadraticCurveTo(-0.02, top - 0.02, 0.02, top - 0.16);
+                        profile.lineTo(0.02, bottom + 0.18);
+                        profile.quadraticCurveTo(0.02, bottom + 0.02, 0.14, bottom);
+
+                        const geometry = new THREE.ExtrudeGeometry(profile, {
+                            depth: width,
+                            bevelEnabled: false,
+                            curveSegments: 20,
+                        });
+
+                        geometry.center();
+                        geometry.rotateY(Math.PI / 2);
+
+                        return new THREE.Mesh(geometry, material);
+                    };
+
+                    const scale = 0.0335;
                     const kioskHeight = 128.5 * scale;
                     const kioskWidth = 76 * scale;
-                    const kioskDepth = 50 * scale;
+                    const kioskDepthBottom = 50 * scale * 0.82;
+                    const kioskDepthTop = 50 * scale * 0.42;
 
                     const frameMaterial = new THREE.MeshStandardMaterial({
                         color: 0x0b1220,
@@ -698,36 +726,40 @@
                     const group = new THREE.Group();
                     scene.add(group);
 
-                    const outerFrame = createRoundedPanel(kioskWidth, kioskHeight, kioskDepth, 0.22, frameMaterial);
+                    const outerFrame = createWedgeBody(kioskWidth, kioskHeight, kioskDepthBottom, kioskDepthTop, frameMaterial);
+                    outerFrame.castShadow = true;
+                    outerFrame.receiveShadow = true;
                     group.add(outerFrame);
 
-                    const whitePanel = createRoundedPanel(kioskWidth - 0.24, kioskHeight - 0.24, kioskDepth - 0.18, 0.18, panelMaterial);
-                    whitePanel.position.z = 0.02;
+                    const frontPlaneZ = -(kioskDepthBottom * 0.5) + 0.11;
+
+                    const whitePanel = createRoundedPanel(kioskWidth - 0.3, kioskHeight - 0.3, 0.1, 0.18, panelMaterial);
+                    whitePanel.position.z = frontPlaneZ;
                     group.add(whitePanel);
 
-                    const screenFrame = createRoundedPanel(kioskWidth - 0.82, kioskHeight - 1.8, 0.14, 0.12, frameMaterial);
-                    screenFrame.position.set(0, -0.12, kioskDepth / 2 - 0.22);
+                    const screenFrame = createRoundedPanel(kioskWidth - 0.9, kioskHeight - 1.92, 0.08, 0.1, frameMaterial);
+                    screenFrame.position.set(0, -0.06, frontPlaneZ + 0.07);
                     group.add(screenFrame);
 
-                    const screen = createRoundedPanel(kioskWidth - 1.02, kioskHeight - 2.05, 0.06, 0.1, screenMaterial);
-                    screen.position.set(0, -0.12, kioskDepth / 2 - 0.1);
+                    const screen = createRoundedPanel(kioskWidth - 1.12, kioskHeight - 2.18, 0.04, 0.08, screenMaterial);
+                    screen.position.set(0, -0.08, frontPlaneZ + 0.12);
                     group.add(screen);
 
                     const gloss = new THREE.Mesh(
-                        new THREE.PlaneGeometry(kioskWidth - 1.28, kioskHeight - 2.45),
+                        new THREE.PlaneGeometry(kioskWidth - 1.26, kioskHeight - 2.5),
                         new THREE.MeshBasicMaterial({
                             color: 0xffffff,
                             transparent: true,
-                            opacity: 0.06,
+                            opacity: 0.08,
                             side: THREE.DoubleSide,
                         })
                     );
-                    gloss.position.set(-0.08, 0.02, kioskDepth / 2 + 0.06);
-                    gloss.rotation.y = -0.14;
+                    gloss.position.set(-0.12, 0.18, frontPlaneZ + 0.16);
+                    gloss.rotation.y = -0.08;
                     group.add(gloss);
 
-                    const sensor = createRoundedPanel(0.78, 0.16, 0.08, 0.06, frameMaterial);
-                    sensor.position.set(0, kioskHeight / 2 - 0.62, kioskDepth / 2 + 0.06);
+                    const sensor = createRoundedPanel(0.72, 0.14, 0.06, 0.05, frameMaterial);
+                    sensor.position.set(0, kioskHeight / 2 - 0.6, frontPlaneZ + 0.11);
                     group.add(sensor);
 
                     const lens = new THREE.Mesh(
@@ -738,11 +770,33 @@
                             emissiveIntensity: 0.18,
                         })
                     );
-                    lens.position.set(-0.19, kioskHeight / 2 - 0.62, kioskDepth / 2 + 0.11);
+                    lens.position.set(-0.18, kioskHeight / 2 - 0.6, frontPlaneZ + 0.14);
                     group.add(lens);
 
-                    group.rotation.x = -0.08;
-                    group.rotation.y = 0.52;
+                    const sideSlot = new THREE.Mesh(
+                        new THREE.BoxGeometry(0.08, 0.42, 0.04),
+                        new THREE.MeshStandardMaterial({
+                            color: 0x161f31,
+                            roughness: 0.32,
+                            metalness: 0.12,
+                        })
+                    );
+                    sideSlot.position.set(kioskWidth / 2 + 0.01, 0.25, 0.18);
+                    group.add(sideSlot);
+
+                    const baseShadow = new THREE.Mesh(
+                        new THREE.PlaneGeometry(kioskWidth * 0.95, 0.16),
+                        new THREE.MeshBasicMaterial({
+                            color: 0x94a3b8,
+                            transparent: true,
+                            opacity: 0.1,
+                        })
+                    );
+                    baseShadow.position.set(0, -kioskHeight / 2 + 0.2, frontPlaneZ + 0.065);
+                    group.add(baseShadow);
+
+                    group.rotation.x = -0.12;
+                    group.rotation.y = 0.5;
 
                     let isVisible = true;
                     let rafId = 0;
